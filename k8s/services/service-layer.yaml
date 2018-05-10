@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rfpselect-service-layer
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8001"
+    port: 8001
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: rfpselect
+    role: service-layer

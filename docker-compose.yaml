@@ -1,7 +1,8 @@
 version: '3'
 services:
   node:
-    build: .
+    # build: .
+    image: "us.gcr.io/rfpselectdev/rfpselect-service:latest"
     ports:
       - "8001:3000"
     environment:
