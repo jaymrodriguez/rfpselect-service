@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: rfpselect-service-layer
+  name: rfpselect-service-frontend
 spec:
   type: LoadBalancer
   ports:
