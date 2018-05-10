@@ -1,7 +1,7 @@
 node {
   def project = 'rfpselectdev'
   def appName = 'rfpselect-service'
-  def feSvcName = "${appName}-service-layer"
+  def feSvcName = "${appName}-frontend"
   def imageTag = "us.gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
   checkout scm
