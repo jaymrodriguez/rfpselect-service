@@ -59,8 +59,8 @@ node {
   checkout scm
 
   stage('Build images') {
-    build_image(imageTagService, "${serviceLayerPath}/Dockerfile")
-    build_image(imageTagFrontend, "${frontendLayerPath}/Dockerfile")
+    build_image(imageTagService, "${serviceLayerPath}/")
+    build_image(imageTagFrontend, "${frontendLayerPath}/")
   }
 
   stage('Push image to registry') {
