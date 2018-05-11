@@ -1,19 +1,3 @@
-node {
-  def project = 'rfpselectdev'
-
-  def serviceLayer = 'rfpselect-service'
-  def frontendLayer = 'rfpselect-frontend'
-  
-  def serviceLayerService = "${serviceLayer}-frontend"
-  def frontendLayerService = "${frontendLayer}-lb"
-
-  def imageTagService = "us.gcr.io/${project}/${serviceLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-  def imageTagFrontend = "us.gcr.io/${project}/${frontendLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-
-  def serviceLayerPath = './service-layer'
-  def frontendLayerPath = './front-end'
-
-
   def build_image(imageTag, dockerfile) {
     sh("docker build -t ${imageTag} ${dockerfile}")
   }
@@ -56,6 +40,21 @@ node {
           echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
     }
   }
+
+node {
+  def project = 'rfpselectdev'
+
+  def serviceLayer = 'rfpselect-service'
+  def frontendLayer = 'rfpselect-frontend'
+  
+  def serviceLayerService = "${serviceLayer}-frontend"
+  def frontendLayerService = "${frontendLayer}-frontend"
+
+  def imageTagService = "us.gcr.io/${project}/${serviceLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+  def imageTagFrontend = "us.gcr.io/${project}/${frontendLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
+  def serviceLayerPath = './service-layer'
+  def frontendLayerPath = './front-end'
 
   checkout scm
 
