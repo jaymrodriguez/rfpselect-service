@@ -1,4 +1,4 @@
-FROM node:10.1-alpine as builder
+FROM node:10.1-alpine
 WORKDIR /usr/src/app
 
 # Install dependencies
@@ -15,6 +15,7 @@ RUN yarn build
 
 # production image
 FROM nginx:1.14.0-alpine
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=0 /usr/src/app/build /usr/share/nginx/html
+# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
