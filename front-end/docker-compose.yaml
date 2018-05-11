@@ -1,0 +1,9 @@
+version: '3'
+services:
+  node:
+    # build: .
+    image: "us.gcr.io/rfpselectdev/rfpselect-frontend:latest"
+    ports:
+      - "8002:80"
+    environment:
+      - NODE_ENV=production

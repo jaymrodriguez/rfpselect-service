@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rfpselect-frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: frontend-layer
+      labels:
+        app: rfpselect
+        role: frontend
+        env: production
+    spec:
+      containers:
+        - image: us.gcr.io/rfpselectdev/rfpselect-frontend:latest
+          name: fronted-layer-node
+          ports:
+          - containerPort: 80
+          env:
+            - name: "NODE_ENV"
+              value: "production"
