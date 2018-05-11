@@ -1,18 +1,28 @@
 node {
   def project = 'rfpselectdev'
-  def appName = 'rfpselect-service'
-  def feSvcName = "${appName}-frontend"
-  def imageTag = "us.gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
-  def build_image(path) {
-    sh("docker build -t ${imageTag} .")
+  def serviceLayer = 'rfpselect-service'
+  def frontendLayer = 'rfpselect-frontend'
+  
+  def serviceLayerService = "${serviceLayer}-frontend"
+  def frontendLayerService = "${frontendLayer}-lb"
+
+  def imageTagService = "us.gcr.io/${project}/${serviceLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+  def imageTagFrontend = "us.gcr.io/${project}/${frontendLayerService}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
+  def serviceLayerPath = './service-layer'
+  def frontendLayerPath = './front-end'
+
+
+  def build_image(imageTag, dockerfile) {
+    sh("docker build -t ${imageTag} ${dockerfile}")
   }
 
-  def push_image() {
+  def push_image(imageTag) {
     sh("gcloud docker -- push ${imageTag}")
   }
 
-  def deploy_to_gcp() {
+  def deploy_to_gcp(feSvcName, imageTag, imagePlaceHolderPath, kuberPath) {
     switch (env.BRANCH_NAME) {
       // Roll out to canary environment
       case "canary":
@@ -27,7 +37,7 @@ node {
       // Roll out to production
       case "master":
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#us.gcr.io/rfpselectdev/rfpselect-service:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
+          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ./k8s/production/*.yaml")
           sh("kubectl --namespace=production apply -f k8s/services/")
           sh("kubectl --namespace=production apply -f k8s/production/")
           sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
@@ -39,7 +49,7 @@ node {
           sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
           // Don't use public load balancing for development branches
           sh("sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/services/frontend.yaml")
-          sh("sed -i.bak 's#us.gcr.io/rfpselectdev/rfpselect-service:1.0.0#${imageTag}#' ./k8s/dev/*.yaml")
+          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ./k8s/dev/*.yaml")
           sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/services/")
           sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/dev/")
           echo 'To access your environment run `kubectl proxy`'
@@ -50,18 +60,18 @@ node {
   checkout scm
 
   stage('Build images') {
-    build_image('react path')
-    build_image('nodejs path')
+    build_image(imageTagService, "${serviceLayerPath}/Dockerfile")
+    build_image(imageTagFrontend, "${frontendLayerPath}/Dockerfile")
   }
 
   stage('Push image to registry') {
-    push_image('image react')
-    push_image('image nodejs')
+    push_image(imageTagService)
+    push_image(imageTagFrontend)
   }
 
   stage("Deploy Application") {
-    deploy_to_gcp('react app')
-    deploy_to_gcp('node app')
+    deploy_to_gcp(serviceLayerService, imageTagService, 'us.gcr.io/rfpselectdev/rfpselect-service:1.0.0', serviceLayerPath)
+    deploy_to_gcp(frontendLayerService, imageTagFrontend, 'us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0', frontendLayerPath)
   }
 
 }

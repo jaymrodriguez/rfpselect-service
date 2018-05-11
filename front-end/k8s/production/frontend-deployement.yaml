@@ -13,7 +13,7 @@ spec:
         env: production
     spec:
       containers:
-        - image: us.gcr.io/rfpselectdev/rfpselect-frontend:latest
+        - image: us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0
           name: fronted-layer-node
           ports:
           - containerPort: 80
