@@ -1,4 +1,5 @@
   def build_image(imageTag, dockerfile) {
+    sh("docker version")
     sh("docker build -t ${imageTag} ${dockerfile}")
   }
 
