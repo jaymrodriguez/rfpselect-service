@@ -10,12 +10,12 @@ RUN yarn install
 COPY . .
 
 RUN yarn build
-# EXPOSE 3000
-# CMD [ "yarn" , "start"]
+EXPOSE 3000
+CMD [ "yarn" , "start"]
 
 # production image
-FROM nginx:1.14.0-alpine
-COPY --from=0 /usr/src/app/build /usr/share/nginx/html
-# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# FROM nginx:1.14.0-alpine
+# COPY --from=0 /usr/src/app/build /usr/share/nginx/html
+# # COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
