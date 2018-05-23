@@ -6,4 +6,6 @@ services:
     ports:
       - "8001:3000"
     environment:
-      - NODE_ENV=production
+      - env=development
+      # - NODE_ENV=production
+      
