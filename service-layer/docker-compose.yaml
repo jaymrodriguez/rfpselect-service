@@ -8,6 +8,8 @@ services:
     environment:
       - env=development
       # - NODE_ENV=production
+    volumes: 
+      - ./controllers:/usr/src/app/controllers
 
 networks:
   default:

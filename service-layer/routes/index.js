@@ -11,5 +11,6 @@ router.get('/', (req, res) => {
 
 router.get('/companies', catchErrors(companyController.getCompanies));
 router.get('/companies/:id', catchErrors(companyController.getCompanyById));
+router.post('/create', catchErrors(companyController.createCompany));
 
 module.exports = router;

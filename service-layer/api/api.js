@@ -1,27 +1,5 @@
 const WPAPI = require('wpapi');
 
-// const namespace = 'wp/v2';
-// const wp = new WPAPI({
-//   endpoint: 'http://wp/wp-json',
-//   // username: 'randyjp',
-//   // password: '123456',
-// });
-
-// const registerCustomRoutes = ((api) => {
-//   // register company routes
-//   wp.companies = api.registerRoute(namespace, '/company/(?P<id>\\d+)');
-// })();
-
-// exports.registerAPI = () => {
-//   const wp = new WPAPI({
-//     endpoint: 'http://wp/wp-json',
-//     // username: 'randyjp',
-//     // password: '123456',
-//   });
-
-//   registerCustomRoutes(wp);
-// };
-
 class WP_API {
   constructor(namespace, apiURL) {
     // this.registerRouter = this.registerRouter.bind(this);
@@ -31,8 +9,8 @@ class WP_API {
 
     this.wp = new WPAPI({
       endpoint: apiURL,
-      //   username: 'randyjp',
-      //   password: '123456',
+      username: 'randyjp',
+      password: '123456',
     });
 
     this.registerRoutes();
