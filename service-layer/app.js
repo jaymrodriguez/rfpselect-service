@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const WP_API = require('./api/api');
 
 const routes = require('./routes/index');
 // const usersRouter = require('./routes/users');
@@ -19,6 +20,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// pass api variables to templates and response
+app.use((req, res, next) => {
+  req.api = new WP_API('wp/v2', 'http://wp/wp-json');
+  // res.api = new WP_API();
+  next();
+});
 
 app.use('/', routes);
 
