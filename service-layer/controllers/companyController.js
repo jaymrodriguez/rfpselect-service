@@ -13,6 +13,9 @@ exports.createCompany = async (req, res) => {
   const companyInfo = {
     title: req.body.title,
     status: "publish",
+    categories: req.body.categories,
+    resourcing: req.body.resourcing,
+    technologies: req.body.technologies,
     fields: {
       name: req.body.name,
       url: req.body.url,
