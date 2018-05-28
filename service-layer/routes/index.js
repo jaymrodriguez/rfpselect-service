@@ -17,6 +17,9 @@ router.post("/companies/add", catchErrors(companyController.createCompany));
 
 /* Location routes. */
 router.get("/locations", catchErrors(locationController.getLocations));
-// router.get("/companies/:id", catchErrors(companyController.getCompanyById));
-// router.post("/companies/add", catchErrors(companyController.createCompany));
+router.get("/locations/:id", catchErrors(locationController.getLocationById));
+router.get(
+  "/locations/company/:id",
+  catchErrors(locationController.getLocationByCompany)
+);
 module.exports = router;
