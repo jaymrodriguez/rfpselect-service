@@ -1,12 +1,12 @@
 exports.getCompanyById = async (req, res) => {
   const { id } = req.params;
   const company = await req.api.wp.companies().id(id);
-  res.json(company);
+  res.status(200).send(company);
 };
 
 exports.getCompanies = async (req, res) => {
   const companies = await req.api.wp.companies();
-  res.json(companies);
+  res.status(200).send(companies);
 };
 
 exports.createCompany = async (req, res) => {
@@ -26,5 +26,5 @@ exports.createCompany = async (req, res) => {
     }
   };
   const company = await req.api.wp.companies().create(companyInfo);
-  res.json(company);
+  res.status(201).send(company);
 };
