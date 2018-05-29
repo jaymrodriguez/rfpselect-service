@@ -4,7 +4,7 @@ const router = express.Router();
 const companyController = require("../controllers/companyController");
 const locationController = require("../controllers/locationController");
 const { catchErrors } = require("../handlers/errorHandlers");
-const { companySchema } = require("../schema/schema");
+const { companySchema, idSchema } = require("../schema/schema");
 
 /* GET home page. */
 router.get("/", (req, res) => {
@@ -13,7 +13,11 @@ router.get("/", (req, res) => {
 
 /* Company routes. */
 router.get("/companies", catchErrors(companyController.getCompanies));
-router.get("/companies/:id", catchErrors(companyController.getCompanyById));
+router.get(
+  "/companies/:id",
+  idSchema,
+  catchErrors(companyController.getCompanyById)
+);
 router.post(
   "/companies/add",
   companySchema,

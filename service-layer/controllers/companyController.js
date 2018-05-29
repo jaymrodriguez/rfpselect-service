@@ -1,6 +1,12 @@
 const { check, validationResult } = require("express-validator/check");
 
 exports.getCompanyById = async (req, res) => {
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    return res.status(422).json({ errors: validationErrors.array() });
+  }
+
   const { id } = req.params;
   const company = await req.api.wp.companies().id(id);
   res.status(200).send(company);
@@ -15,9 +21,7 @@ exports.createCompany = async (req, res) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
-    return res
-      .status(422)
-      .json({ errors: validationErrors.array(), body: req.body });
+    return res.status(422).json({ errors: validationErrors.array() });
   }
 
   const companyInfo = {

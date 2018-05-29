@@ -12,3 +12,5 @@ exports.companySchema = [
   check("resourcing").custom(isArrayOrInt),
   check("technologies").custom(isArrayOrInt)
 ];
+
+exports.idSchema = [check("id").isInt()];
