@@ -23,6 +23,12 @@ router.post(
   companySchema,
   catchErrors(companyController.createCompany)
 );
+router.put(
+  "/companies/update/:id",
+  companySchema,
+  idSchema,
+  catchErrors(companyController.updateCompany)
+);
 
 /* Location routes. */
 router.get("/locations", catchErrors(locationController.getLocations));
