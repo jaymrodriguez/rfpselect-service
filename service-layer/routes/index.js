@@ -1,9 +1,10 @@
 const express = require("express");
-
 const router = express.Router();
+
 const companyController = require("../controllers/companyController");
 const locationController = require("../controllers/locationController");
 const { catchErrors } = require("../handlers/errorHandlers");
+const { companySchema } = require("../schema/schema");
 
 /* GET home page. */
 router.get("/", (req, res) => {
@@ -13,7 +14,11 @@ router.get("/", (req, res) => {
 /* Company routes. */
 router.get("/companies", catchErrors(companyController.getCompanies));
 router.get("/companies/:id", catchErrors(companyController.getCompanyById));
-router.post("/companies/add", catchErrors(companyController.createCompany));
+router.post(
+  "/companies/add",
+  companySchema,
+  catchErrors(companyController.createCompany)
+);
 
 /* Location routes. */
 router.get("/locations", catchErrors(locationController.getLocations));
