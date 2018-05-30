@@ -1,9 +1,19 @@
 version: '3'
 services:
   node:
-    # build: .
-    image: "us.gcr.io/rfpselectdev/rfpselect-service:latest"
+    build: .
+    # image: "us.gcr.io/rfpselectdev/rfpselect-service:latest"
     ports:
       - "8001:3000"
     environment:
-      - NODE_ENV=production
+      - env=development
+      # - NODE_ENV=production
+    volumes: 
+      - ./controllers:/usr/src/app/controllers
+
+networks:
+  default:
+    external:
+      name: rfpselect-network
+
+    
