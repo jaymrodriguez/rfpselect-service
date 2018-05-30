@@ -13,9 +13,9 @@
       case "canary":
           // Change deployed image in canary to the one we just built
           // -i edits the fie in-place. bak will create a backup file
-          sh("sed -i.bak 's#us.gcr.io/rfpselectdev/rfpselect-service:1.0.0#${imageTag}#' ./k8s/canary/*.yaml")
-          sh("kubectl --namespace=production apply -f k8s/services/")
-          sh("kubectl --namespace=production apply -f k8s/canary/")
+          sh("sed -i.bak 's#us.gcr.io/rfpselectdev/rfpselect-service:1.0.0#${imageTag}#' ${kuberPath}/k8s/canary/*.yaml")
+          sh("kubectl --namespace=production apply -f ${kuberPath}/k8s/services/")
+          sh("kubectl --namespace=production apply -f ${kuberPath}/k8s/canary/")
           sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
           break
 
@@ -24,9 +24,9 @@
           // Create namespace if it doesn't exist
           sh("kubectl get ns production || kubectl create ns production")
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ./k8s/production/*.yaml")
-          sh("kubectl --namespace=production apply -f k8s/services/")
-          sh("kubectl --namespace=production apply -f k8s/production/")
+          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ${kuberPath}/k8s/production/*.yaml")
+          sh("kubectl --namespace=production apply -f ${kuberPath}/k8s/services/")
+          sh("kubectl --namespace=production apply -f ${kuberPath}/k8s/production/")
           sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
           break
 
@@ -35,9 +35,9 @@
           // Create namespace if it doesn't exist
           sh("kubectl get ns development || kubectl create ns development")
           // Change deployed image in to the one we just built
-          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ./k8s/development/*.yaml")
-          sh("kubectl --namespace=development apply -f k8s/services/")
-          sh("kubectl --namespace=development apply -f k8s/development/")
+          sh("sed -i.bak 's#${imagePlaceHolderPath}#${imageTag}#' ${kuberPath}/k8s/development/*.yaml")
+          sh("kubectl --namespace=development apply -f ${kuberPath}/k8s/services/")
+          sh("kubectl --namespace=development apply -f ${kuberPath}/k8s/development/")
           sh("echo http://`kubectl --namespace=development get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
           break
 
@@ -74,17 +74,17 @@ node {
 
   stage('Build images') {
     build_image(imageTagService, "${serviceLayerPath}/")
-    build_image(imageTagFrontend, "${frontendLayerPath}/")
+    // build_image(imageTagFrontend, "${frontendLayerPath}/")
   }
 
   stage('Push image to registry') {
     push_image(imageTagService)
-    push_image(imageTagFrontend)
+    // push_image(imageTagFrontend)
   }
 
   stage("Deploy Application") {
     deploy_to_gcp(serviceLayerService, imageTagService, 'us.gcr.io/rfpselectdev/rfpselect-service:1.0.0', serviceLayerPath)
-    deploy_to_gcp(frontendLayerService, imageTagFrontend, 'us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0', frontendLayerPath)
+    // deploy_to_gcp(frontendLayerService, imageTagFrontend, 'us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0', frontendLayerPath)
   }
 
 }
