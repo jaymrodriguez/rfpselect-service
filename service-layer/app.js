@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // pass api variables to templates and response
 app.use((req, res, next) => {
-  req.api = new WP_API("wp/v2", "http://wp/wp-json");
+  req.api = new WP_API("wp/v2", process.env.WP_URL);
   // res.api = new WP_API();
   next();
 });
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("NODE_ENV") === "development" ? err : {};
+  res.locals.error = process.env.NODE_ENV === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
