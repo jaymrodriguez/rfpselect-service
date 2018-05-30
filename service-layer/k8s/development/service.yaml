@@ -21,4 +21,4 @@ spec:
             - name: "NODE_ENV"
               value: "development"
             - name: "WP_URL"
-              value: "http://35.199.27.199:8000/"
+              value: "http://35.199.27.199:8000/wp-json"

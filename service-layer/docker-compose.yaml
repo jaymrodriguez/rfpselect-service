@@ -6,8 +6,9 @@ services:
     ports:
       - "8001:3000"
     environment:
-      - env=development
-      # - NODE_ENV=production
+      # - env=development
+      - NODE_ENV=development
+      - WP_URL=http://wp/wp-json
     volumes: 
       - ./controllers:/usr/src/app/controllers
 
