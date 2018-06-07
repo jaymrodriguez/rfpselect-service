@@ -31,8 +31,11 @@ router.put(
 );
 
 /* Location routes. */
-router.get("/locations", catchErrors(locationController.getLocations));
-router.get("/locations/:id", catchErrors(locationController.getLocationById));
+router.get(
+  "/locations/:id",
+  idSchema,
+  catchErrors(locationController.getLocationById)
+);
 router.get(
   "/locations/company/:company_id",
   catchErrors(locationController.getLocationByCompany)
