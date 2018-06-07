@@ -4,7 +4,11 @@ const router = express.Router();
 const companyController = require("../controllers/companyController");
 const locationController = require("../controllers/locationController");
 const { catchErrors } = require("../handlers/errorHandlers");
-const { companySchema, idSchema } = require("../schema/schema");
+const {
+  companySchema,
+  idSchema,
+  companyIdSchema
+} = require("../schema/schema");
 
 /* GET home page. */
 router.get("/", (req, res) => {
@@ -38,6 +42,7 @@ router.get(
 );
 router.get(
   "/locations/company/:company_id",
+  companyIdSchema,
   catchErrors(locationController.getLocationByCompany)
 );
 module.exports = router;

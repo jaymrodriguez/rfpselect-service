@@ -17,6 +17,17 @@ exports.getLocationById = async (req, res) => {
 
 exports.getLocationByCompany = async (req, res) => {
   const { company_id } = req.params;
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
+  }
+
   const locations = await req.api.wp.locations().company_id(company_id);
-  res.json(locations);
+
+  locations.length > 0
+    ? res.status(STATUS_CODES.OK).json(locations)
+    : res.status(STATUS_CODES.NOT_FOUND).json({});
 };
