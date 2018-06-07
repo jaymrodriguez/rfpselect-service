@@ -14,3 +14,4 @@ exports.companySchema = [
 ];
 
 exports.idSchema = [check("id").isInt()];
+exports.companyIdSchema = [check("company_id").isInt()];
