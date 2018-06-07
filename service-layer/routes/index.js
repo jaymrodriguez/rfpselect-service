@@ -34,7 +34,7 @@ router.put(
 router.get("/locations", catchErrors(locationController.getLocations));
 router.get("/locations/:id", catchErrors(locationController.getLocationById));
 router.get(
-  "/locations/company/:id",
+  "/locations/company/:company_id",
   catchErrors(locationController.getLocationByCompany)
 );
 module.exports = router;

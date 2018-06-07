@@ -10,7 +10,7 @@ exports.getLocationById = async (req, res) => {
 };
 
 exports.getLocationByCompany = async (req, res) => {
-  const { id } = req.params;
-  const locations = await req.api.wp.locations().company_id(id);
+  const { company_id } = req.params;
+  const locations = await req.api.wp.locations().company_id(company_id);
   res.json(locations);
 };
