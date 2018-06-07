@@ -45,4 +45,5 @@ router.get(
   companyIdSchema,
   catchErrors(locationController.getLocationByCompany)
 );
+router.post("/locations/add", catchErrors(locationController.createLocation));
 module.exports = router;
