@@ -58,5 +58,12 @@ router.post(
   runValidations,
   catchErrors(locationController.createLocation)
 );
+router.put(
+  "/locations/update/:id",
+  locationSchema,
+  idSchema,
+  runValidations,
+  catchErrors(locationController.updateLocation)
+);
 
 module.exports = router;
