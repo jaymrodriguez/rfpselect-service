@@ -2,7 +2,8 @@ const { check } = require("express-validator/check");
 const {
   isValidDate,
   isArrayOrInt,
-  companyExists
+  companyExists,
+  companyHasHQ
 } = require("../helpers/helpers");
 
 exports.companySchema = [
@@ -36,7 +37,9 @@ exports.locationSchema = [
     .isAlpha()
     .not()
     .isEmpty(),
-  check("is_hq").isBoolean()
+  check("is_hq")
+    .isBoolean()
+    .custom((value, { req }) => companyHasHQ(value, req))
 ];
 
 exports.idSchema = [check("id").isInt()];

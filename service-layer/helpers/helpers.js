@@ -40,3 +40,18 @@ exports.companyExists = async (company_id, req) => {
   if (company.hasOwnProperty("code")) return false;
   return true;
 };
+
+exports.companyHasHQ = async (is_hq, req) => {
+  const is_hq_bool = is_hq === "true";
+
+  if (!is_hq_bool) return true;
+
+  const { company_id } = req.body;
+  const locations = await req.api.wp.locations().company_id(company_id);
+
+  for (const location of locations) {
+    if (location.acf.is_hq) return false;
+  }
+
+  return true;
+};
