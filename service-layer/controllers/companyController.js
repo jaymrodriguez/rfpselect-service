@@ -3,13 +3,6 @@ const { check, validationResult } = require("express-validator/check");
 
 exports.getCompanyById = async (req, res) => {
   const { id } = req.params;
-  const validationErrors = validationResult(req);
-
-  if (!validationErrors.isEmpty()) {
-    return res
-      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
-      .json({ errors: validationErrors.array() });
-  }
 
   const company = await req.api.wp.companies().id(id);
   res.status(STATUS_CODES.OK).send(company);
@@ -21,14 +14,6 @@ exports.getCompanies = async (req, res) => {
 };
 
 exports.createCompany = async (req, res) => {
-  const validationErrors = validationResult(req);
-
-  if (!validationErrors.isEmpty()) {
-    return res
-      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
-      .json({ errors: validationErrors.array() });
-  }
-
   const companyInfo = {
     title: req.body.title,
     status: "publish",
@@ -50,13 +35,6 @@ exports.createCompany = async (req, res) => {
 
 exports.updateCompany = async (req, res) => {
   const { id } = req.params;
-  const validationErrors = validationResult(req);
-
-  if (!validationErrors.isEmpty()) {
-    return res
-      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
-      .json({ errors: validationErrors.array() });
-  }
 
   const companyInfo = {
     title: req.body.title,
