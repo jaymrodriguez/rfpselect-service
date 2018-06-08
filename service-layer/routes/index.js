@@ -7,7 +7,8 @@ const { catchErrors } = require("../handlers/errorHandlers");
 const {
   companySchema,
   idSchema,
-  companyIdSchema
+  companyIdSchema,
+  locationSchema
 } = require("../schema/schema");
 
 /* GET home page. */
@@ -45,5 +46,10 @@ router.get(
   companyIdSchema,
   catchErrors(locationController.getLocationByCompany)
 );
-router.post("/locations/add", catchErrors(locationController.createLocation));
+router.post(
+  "/locations/add",
+  locationSchema,
+  catchErrors(locationController.createLocation)
+);
+
 module.exports = router;

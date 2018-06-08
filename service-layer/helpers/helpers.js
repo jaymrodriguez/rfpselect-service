@@ -29,3 +29,14 @@ exports.isArrayOrInt = input => {
   if (!isNaN(parseInt(input, 10))) return true;
   return false;
 };
+
+exports.companyExists = async (company_id, req) => {
+  const id = parseInt(company_id, 10);
+
+  if (!Number.isInteger(id)) return false;
+
+  const company = await req.api.wp.companies().id(id);
+
+  if (company.hasOwnProperty("code")) return false;
+  return true;
+};

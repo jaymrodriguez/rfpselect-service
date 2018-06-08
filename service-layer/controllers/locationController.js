@@ -33,6 +33,14 @@ exports.getLocationByCompany = async (req, res) => {
 };
 
 exports.createLocation = async (req, res) => {
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
+  }
+
   const locationInfo = {
     title: req.body.title,
     status: "publish",
