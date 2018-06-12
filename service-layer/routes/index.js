@@ -1,69 +1,67 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
 
-const companyController = require("../controllers/companyController");
-const locationController = require("../controllers/locationController");
-const { catchErrors } = require("../handlers/errorHandlers");
-const { runValidations } = require("../handlers/validationHandler");
+const companyController = require('../controllers/companyController');
+const locationController = require('../controllers/locationController');
+const { catchErrors } = require('../handlers/errorHandlers');
+const { runValidations } = require('../handlers/validationHandler');
 const {
-  companySchema,
-  idSchema,
-  companyIdSchema,
-  locationSchema
-} = require("../schema/schema");
+  companySchema, idSchema, companyIdSchema, locationSchema,
+} = require('../schema/schema');
 
 /* GET home page. */
-router.get("/", (req, res) => {
-  res.render("index", { title: "Express" });
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Express' });
 });
 
 /* Company routes. */
-router.get("/companies", catchErrors(companyController.getCompanies));
+router.get('/companies', catchErrors(companyController.getCompanies));
 router.get(
-  "/companies/:id",
+  '/companies/:id',
   idSchema,
   runValidations,
-  catchErrors(companyController.getCompanyById)
+  catchErrors(companyController.getCompanyById),
 );
 router.post(
-  "/companies/add",
+  '/companies/add',
   companySchema,
   runValidations,
-  catchErrors(companyController.createCompany)
+  catchErrors(companyController.createCompany),
 );
 router.put(
-  "/companies/update/:id",
+  '/companies/update/:id',
   companySchema,
   idSchema,
   runValidations,
-  catchErrors(companyController.updateCompany)
+  catchErrors(companyController.updateCompany),
 );
 
 /* Location routes. */
 router.get(
-  "/locations/:id",
+  '/locations/:id',
   idSchema,
   runValidations,
-  catchErrors(locationController.getLocationById)
+  catchErrors(locationController.getLocationById),
 );
 router.get(
-  "/locations/company/:company_id",
+  '/locations/company/:company_id',
   companyIdSchema,
   runValidations,
-  catchErrors(locationController.getLocationByCompany)
+  catchErrors(locationController.getLocationByCompany),
 );
 router.post(
-  "/locations/add",
+  '/locations/add',
   locationSchema,
   runValidations,
-  catchErrors(locationController.createLocation)
+  catchErrors(locationController.createLocation),
 );
 router.put(
-  "/locations/update/:id",
+  '/locations/update/:id',
   locationSchema,
   idSchema,
   runValidations,
-  catchErrors(locationController.updateLocation)
+  catchErrors(locationController.updateLocation),
 );
 
 module.exports = router;
