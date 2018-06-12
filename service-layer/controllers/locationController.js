@@ -1,5 +1,4 @@
-const { STATUS_CODES } = require("../helpers/enums");
-const { check, validationResult } = require("express-validator/check");
+const { STATUS_CODES } = require('../helpers/enums');
 
 exports.getLocationById = async (req, res) => {
   const { id } = req.params;
@@ -21,7 +20,7 @@ exports.getLocationByCompany = async (req, res) => {
 exports.createLocation = async (req, res) => {
   const locationInfo = {
     title: req.body.title,
-    status: "publish",
+    status: 'publish',
     fields: {
       company_id: req.body.company_id,
       address: req.body.address,
@@ -30,8 +29,8 @@ exports.createLocation = async (req, res) => {
       zip_code: req.body.zip_code,
       state_region: req.body.state_region,
       country: req.body.country,
-      is_hq: req.body.is_hq === "true"
-    }
+      is_hq: req.body.is_hq === 'true',
+    },
   };
 
   const location = await req.api.wp.locations().create(locationInfo);
@@ -44,7 +43,7 @@ exports.updateLocation = async (req, res) => {
 
   const locationInfo = {
     title: req.body.title,
-    status: "publish",
+    status: 'publish',
     fields: {
       company_id: req.body.company_id,
       address: req.body.address,
@@ -53,8 +52,8 @@ exports.updateLocation = async (req, res) => {
       zip_code: req.body.zip_code,
       state_region: req.body.state_region,
       country: req.body.country,
-      is_hq: req.body.is_hq === "true"
-    }
+      is_hq: req.body.is_hq,
+    },
   };
 
   const location = await req.api.wp

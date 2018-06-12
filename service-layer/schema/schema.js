@@ -55,7 +55,7 @@ exports.locationSchema = [
     .escape()
     .trim(),
   check('is_hq')
-    .isBoolean()
+    .toBoolean()
     .custom((value, { req }) => companyHasHQ(value, req)),
 ];
 

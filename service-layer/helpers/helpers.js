@@ -43,9 +43,7 @@ exports.companyExists = async (companyId, req) => {
 };
 
 exports.companyHasHQ = async (isHq, req) => {
-  const isHqBool = isHq === 'true';
-
-  if (!isHqBool) return true;
+  if (!isHq) return true;
 
   const { company_id } = req.body;
   const locations = await req.api.wp.locations().company_id(company_id);
