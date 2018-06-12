@@ -49,5 +49,14 @@ exports.companyHasHQ = async (isHq, req) => {
   const locations = await req.api.wp.locations().company_id(company_id);
   const hasHq = locations.findIndex(location => location.acf.is_hq === true);
 
+  // If company we are editting is the same as the HQ return TRUE
+  if (
+    req.method === 'PUT' &&
+    hasHq > -1 &&
+    locations[hasHq].acf.company_id === Number.parseInt(company_id, 10)
+  ) {
+    return true;
+  }
+
   return hasHq === -1;
 };
