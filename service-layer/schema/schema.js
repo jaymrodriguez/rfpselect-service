@@ -43,14 +43,12 @@ exports.locationSchema = [
     .trim()
     .customSanitizer(inHTMLData),
   check('city')
-    .isAlpha()
     .not()
     .isEmpty()
     .escape()
     .trim()
     .customSanitizer(inHTMLData),
   check('zip_code')
-    .isAlphanumeric()
     .not()
     .isEmpty()
     .escape()
