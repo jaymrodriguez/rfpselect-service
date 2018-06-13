@@ -1,3 +1,4 @@
+const { STATUS_CODES } = require("../helpers/enums");
 const { check, validationResult } = require("express-validator/check");
 
 exports.getCompanyById = async (req, res) => {
@@ -5,23 +6,27 @@ exports.getCompanyById = async (req, res) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
-    return res.status(422).json({ errors: validationErrors.array() });
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
   }
 
   const company = await req.api.wp.companies().id(id);
-  res.status(200).send(company);
+  res.status(STATUS_CODES.OK).send(company);
 };
 
 exports.getCompanies = async (req, res) => {
   const companies = await req.api.wp.companies();
-  res.status(200).send(companies);
+  res.status(STATUS_CODES.OK).send(companies);
 };
 
 exports.createCompany = async (req, res) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
-    return res.status(422).json({ errors: validationErrors.array() });
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
   }
 
   const companyInfo = {
@@ -40,7 +45,7 @@ exports.createCompany = async (req, res) => {
     }
   };
   const company = await req.api.wp.companies().create(companyInfo);
-  res.status(201).send(company);
+  res.status(STATUS_CODES.CREATED).send(company);
 };
 
 exports.updateCompany = async (req, res) => {
@@ -48,7 +53,9 @@ exports.updateCompany = async (req, res) => {
   const validationErrors = validationResult(req);
 
   if (!validationErrors.isEmpty()) {
-    return res.status(422).json({ errors: validationErrors.array() });
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
   }
 
   const companyInfo = {
@@ -70,5 +77,5 @@ exports.updateCompany = async (req, res) => {
     .companies()
     .id(id)
     .update(companyInfo);
-  res.status(200).send(company);
+  res.status(STATUS_CODES.OK).send(company);
 };
