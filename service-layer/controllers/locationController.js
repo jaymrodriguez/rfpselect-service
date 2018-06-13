@@ -1,16 +1,33 @@
-exports.getLocations = async (req, res) => {
-  const locations = await req.api.wp.locations();
-  res.json(locations);
-};
+const { STATUS_CODES } = require("../helpers/enums");
+const { check, validationResult } = require("express-validator/check");
 
 exports.getLocationById = async (req, res) => {
   const { id } = req.params;
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
+  }
+
   const locations = await req.api.wp.locations().id(id);
-  res.json(locations);
+  res.status(STATUS_CODES.OK).json(locations);
 };
 
 exports.getLocationByCompany = async (req, res) => {
-  const { id } = req.params;
-  const locations = await req.api.wp.locations().company_id(id);
-  res.json(locations);
+  const { company_id } = req.params;
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    return res
+      .status(STATUS_CODES.UNPROCESSABLE_ENTITY)
+      .json({ errors: validationErrors.array() });
+  }
+
+  const locations = await req.api.wp.locations().company_id(company_id);
+
+  locations.length > 0
+    ? res.status(STATUS_CODES.OK).json(locations)
+    : res.status(STATUS_CODES.NOT_FOUND).json({});
 };
