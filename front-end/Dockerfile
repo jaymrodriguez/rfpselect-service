@@ -77,7 +77,7 @@ RUN yarn install
 # # we are at the working directory and have an ignore file, copy everything
 COPY . .
 
-RUN yarn build
+# RUN yarn build
 COPY build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
