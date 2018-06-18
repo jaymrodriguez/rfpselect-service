@@ -4,6 +4,7 @@ const router = express.Router();
 
 const companyController = require('../controllers/companyController');
 const locationController = require('../controllers/locationController');
+const taxonomyController = require('../controllers/taxonomyController');
 const { catchErrors } = require('../handlers/errorHandlers');
 const { runValidations } = require('../handlers/validationHandler');
 const {
@@ -63,5 +64,11 @@ router.put(
   runValidations,
   catchErrors(locationController.updateLocation),
 );
+
+/* taxonomy routes. */
+router.get('/taxomies', catchErrors(taxonomyController.getTaxonomies));
+router.get('/taxomies/categories', catchErrors(taxonomyController.getCategories));
+router.get('/taxomies/resourcing', catchErrors(taxonomyController.getResourcing));
+router.get('/taxomies/technologies', catchErrors(taxonomyController.getTechnologies));
 
 module.exports = router;
