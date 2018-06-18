@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 
 class TagSelector extends React.Component {
   static propTypes = {
-    tags: PropTypes.array.isRequired,
-    suggestions: PropTypes.array.isRequired,
+    suggestions: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
   state = {
     tags: [],
-    suggestions: [],
   };
   handleDelete = (i) => {
     const tags = this.state.tags.slice(0); // get local copy;
@@ -17,15 +15,16 @@ class TagSelector extends React.Component {
     this.setState({ tags });
   };
   handleAddition = (tag) => {
-    const tags = [].concat(this.state.tag, tag);
+    const tags = [].concat(this.state.tags, tag);
     this.setState({ tags });
   };
   render() {
-    const { tags, suggestions } = this.state;
+    const { tags } = this.state;
+    const { suggestions } = this.props;
 
     return (
       <ReactTags
-        tag={tags}
+        tags={tags}
         suggestions={suggestions}
         handleDelete={this.handleDelete}
         handleAddition={this.handleAddition}
