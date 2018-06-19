@@ -1,12 +1,22 @@
 import React from 'react';
 import TagSelector from './TagSelector';
+import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 
 class CompanyForm extends React.Component {
   state = {
-    tagsxx: [{ id: 1, name: 'Apples' }, { id: 2, name: 'Pears' }],
+    resources: [],
+    categories: [],
+    technologies: [],
   };
+  async componentDidMount() {
+    getResourcing().then(resources => this.setState({ resources }));
+    getCategories().then(categories => this.setState({ categories }));
+    getTechnologies().then(technologies => this.setState({ technologies }));
+  }
   render() {
-    const tags = [{ id: 1, name: 'Apples' }, { id: 2, name: 'Pears' }];
+    // const tags = [{ id: 1, name: 'Apples' }, { id: 2, name: 'Pears' }];
+    const { resources, categories, technologies } = this.state;
+
     return (
       <form>
         <label htmlFor="name">
@@ -29,16 +39,18 @@ class CompanyForm extends React.Component {
           Description:
           <textarea name="description" rows="10" cols="30" />{' '}
         </label>
-
-        <label htmlFor="">
-          Techs:
-          <TagSelector suggestions={tags} />
+        <label htmlFor="resourcing">
+          Resourcing:
+          <TagSelector suggestions={resources} />
         </label>
-        {/* <input type="text" /> */}
-        {/* <label htmlFor="" />
-        <input type="text" />
-        <label htmlFor="" />
-        <input type="text" /> */}
+        <label htmlFor="categories">
+          Categories:
+          <TagSelector suggestions={categories} />
+        </label>
+        <label htmlFor="technologies">
+          Technologies:
+          <TagSelector suggestions={technologies} />
+        </label>
       </form>
     );
   }
