@@ -11,6 +11,11 @@ class CompanyForm extends React.Component {
     resources: [],
     categories: [],
     technologies: [],
+    name: '',
+    url: '',
+    foundingDate: '',
+    sizeOrganization: 0,
+    description: '',
   };
   async componentDidMount() {
     const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
@@ -22,31 +27,55 @@ class CompanyForm extends React.Component {
       });
     }));
   }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.description.value);
+  };
+  handleInputChange = (event) => {};
   render() {
-    const { resources, categories, technologies } = this.state;
+    const {
+      resources,
+      categories,
+      technologies,
+      name,
+      url,
+      foundingDate,
+      sizeOrganization,
+      description,
+    } = this.state;
     return (
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="name-control">
               <ControlLabel>Name</ControlLabel>
-              <FormControl type="text" placeholder="Enter Name" />
+              <FormControl type="text" placeholder="Enter Name" name="name" value={name} />
             </FormGroup>
             <FormGroup controlId="url-control">
               <ControlLabel>URL</ControlLabel>
-              <FormControl type="url" placeholder="Enter URL" />
+              <FormControl type="url" placeholder="Enter URL" name="url" value={url} />
             </FormGroup>
             <FormGroup controlId="founding-date-control">
               <ControlLabel>Founding Date</ControlLabel>
-              <FormControl type="date" />
+              <FormControl type="date" name="foundingDate" value={foundingDate} />
             </FormGroup>
             <FormGroup controlId="size-organization-control">
               <ControlLabel>Size Of Organization</ControlLabel>
-              <FormControl type="Number" placeholder="Number of members" />
+              <FormControl
+                type="Number"
+                placeholder="Number of members"
+                name="sizeOrganization"
+                value={sizeOrganization}
+              />
             </FormGroup>
             <FormGroup controlId="description-control">
               <ControlLabel>Description</ControlLabel>
-              <FormControl componentClass="textarea" placeholder="Company's description" />
+              <FormControl
+                componentClass="textarea"
+                placeholder="Company's description"
+                name="description"
+                value={description}
+              />
             </FormGroup>
             <FormGroup controlId="resourcing-control">
               <ControlLabel>Resourcing</ControlLabel>
