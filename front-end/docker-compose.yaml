@@ -7,3 +7,4 @@ services:
       - "8002:80"
     environment:
       - NODE_ENV=development
+      - HTTP_PROXY=http://localhost:8001
