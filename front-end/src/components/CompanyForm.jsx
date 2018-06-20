@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import TagSelector from './TagSelector';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 
@@ -9,14 +10,17 @@ class CompanyForm extends React.Component {
     technologies: [],
   };
   async componentDidMount() {
-    getResourcing().then(resources => this.setState({ resources }));
-    getCategories().then(categories => this.setState({ categories }));
-    getTechnologies().then(technologies => this.setState({ technologies }));
+    const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
+    results.then(axios.spread((resources, categories, technologies) => {
+      this.setState({
+        resources: resources.data,
+        categories: categories.data,
+        technologies: technologies.data,
+      });
+    }));
   }
   render() {
-    // const tags = [{ id: 1, name: 'Apples' }, { id: 2, name: 'Pears' }];
     const { resources, categories, technologies } = this.state;
-    console.log(resources);
     return (
       <form>
         <label htmlFor="name">
