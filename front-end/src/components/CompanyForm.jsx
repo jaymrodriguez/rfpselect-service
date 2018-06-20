@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import TagSelector from './TagSelector';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
+
+import '../css/tags-style.css';
 
 class CompanyForm extends React.Component {
   state = {
@@ -22,40 +25,47 @@ class CompanyForm extends React.Component {
   render() {
     const { resources, categories, technologies } = this.state;
     return (
-      <form>
-        <label htmlFor="name">
-          Name:
-          <input type="text" id="name" name="name" />
-        </label>
-        <label htmlFor="url">
-          URL:
-          <input type="url" name="url" />
-        </label>
-        <label htmlFor="founding-date">
-          Founding Date:
-          <input type="date" name="founding-date" />{' '}
-        </label>
-        <label htmlFor="size-organization">
-          Size Of Organization:
-          <input type="number" name="size-organization" />{' '}
-        </label>
-        <label htmlFor="description">
-          Description:
-          <textarea name="description" rows="10" cols="30" />{' '}
-        </label>
-        <label htmlFor="resourcing">
-          Resourcing:
-          <TagSelector suggestions={resources} />
-        </label>
-        <label htmlFor="categories">
-          Categories:
-          <TagSelector suggestions={categories} />
-        </label>
-        <label htmlFor="technologies">
-          Technologies:
-          <TagSelector suggestions={technologies} />
-        </label>
-      </form>
+      <Row>
+        <Col xs={12} sm={9} md={3} lg={9}>
+          <form>
+            <FormGroup controlId="name-control">
+              <ControlLabel>Name</ControlLabel>
+              <FormControl type="text" placeholder="Enter Name" />
+            </FormGroup>
+            <FormGroup controlId="url-control">
+              <ControlLabel>URL</ControlLabel>
+              <FormControl type="url" placeholder="Enter URL" />
+            </FormGroup>
+            <FormGroup controlId="founding-date-control">
+              <ControlLabel>Founding Date</ControlLabel>
+              <FormControl type="date" />
+            </FormGroup>
+            <FormGroup controlId="size-organization-control">
+              <ControlLabel>Size Of Organization</ControlLabel>
+              <FormControl type="Number" placeholder="Number of members" />
+            </FormGroup>
+            <FormGroup controlId="description-control">
+              <ControlLabel>Description</ControlLabel>
+              <FormControl componentClass="textarea" placeholder="Company's description" />
+            </FormGroup>
+            <FormGroup controlId="resourcing-control">
+              <ControlLabel>Resourcing</ControlLabel>
+              <TagSelector suggestions={resources} className="form-control" />
+            </FormGroup>
+            <FormGroup controlId="categories-control">
+              <ControlLabel>Categories</ControlLabel>
+              <TagSelector suggestions={categories} className="form-control" />
+            </FormGroup>
+            <FormGroup controlId="technologies-control">
+              <ControlLabel>Technologies</ControlLabel>
+              <TagSelector suggestions={technologies} className="form-control" />
+            </FormGroup>
+            <Button type="submit" className="btn-send">
+              Submit
+            </Button>
+          </form>
+        </Col>
+      </Row>
     );
   }
 }
