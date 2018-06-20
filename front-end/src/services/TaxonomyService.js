@@ -1,17 +1,16 @@
+import axios from 'axios';
+
 export const getResourcing = async () => {
-  const response = await fetch('/taxonomies/resourcing');
-  const resourcing = await response.json();
-  return resourcing;
+  const resourcing = await axios.get('/taxonomies/resourcing');
+  return resourcing.data;
 };
 
 export const getTechnologies = async () => {
-  const response = await fetch('/taxonomies/technologies');
-  const technologies = await response.json();
-  return technologies;
+  const technologies = await axios.get('/taxonomies/technologies');
+  return technologies.data;
 };
 
 export const getCategories = async () => {
-  const response = await fetch('/taxonomies/categories');
-  const categories = await response.json();
-  return categories;
+  const categories = await axios.get('/taxonomies/categories');
+  return categories.data;
 };

@@ -16,7 +16,7 @@ class CompanyForm extends React.Component {
   render() {
     // const tags = [{ id: 1, name: 'Apples' }, { id: 2, name: 'Pears' }];
     const { resources, categories, technologies } = this.state;
-
+    console.log(resources);
     return (
       <form>
         <label htmlFor="name">
