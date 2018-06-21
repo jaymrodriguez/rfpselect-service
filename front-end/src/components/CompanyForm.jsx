@@ -31,7 +31,13 @@ class CompanyForm extends React.Component {
     event.preventDefault();
     console.log(event.target.description.value);
   };
-  handleInputChange = (event) => {};
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: value,
+    });
+  };
   render() {
     const {
       resources,
@@ -49,15 +55,32 @@ class CompanyForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="name-control">
               <ControlLabel>Name</ControlLabel>
-              <FormControl type="text" placeholder="Enter Name" name="name" value={name} />
+              <FormControl
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                value={name}
+                onChange={this.handleInputChange}
+              />
             </FormGroup>
             <FormGroup controlId="url-control">
               <ControlLabel>URL</ControlLabel>
-              <FormControl type="url" placeholder="Enter URL" name="url" value={url} />
+              <FormControl
+                type="url"
+                placeholder="Enter URL"
+                name="url"
+                value={url}
+                onChange={this.handleInputChange}
+              />
             </FormGroup>
             <FormGroup controlId="founding-date-control">
               <ControlLabel>Founding Date</ControlLabel>
-              <FormControl type="date" name="foundingDate" value={foundingDate} />
+              <FormControl
+                type="date"
+                name="foundingDate"
+                value={foundingDate}
+                onChange={this.handleInputChange}
+              />
             </FormGroup>
             <FormGroup controlId="size-organization-control">
               <ControlLabel>Size Of Organization</ControlLabel>
@@ -66,6 +89,7 @@ class CompanyForm extends React.Component {
                 placeholder="Number of members"
                 name="sizeOrganization"
                 value={sizeOrganization}
+                onChange={this.handleInputChange}
               />
             </FormGroup>
             <FormGroup controlId="description-control">
@@ -75,6 +99,7 @@ class CompanyForm extends React.Component {
                 placeholder="Company's description"
                 name="description"
                 value={description}
+                onChange={this.handleInputChange}
               />
             </FormGroup>
             <FormGroup controlId="resourcing-control">

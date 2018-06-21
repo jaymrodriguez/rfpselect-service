@@ -28,6 +28,7 @@ class TagSelector extends React.Component {
         suggestions={suggestions}
         handleDelete={this.handleDelete}
         handleAddition={this.handleAddition}
+        minQueryLength={1}
       />
     );
   }
