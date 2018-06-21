@@ -8,22 +8,25 @@ import '../css/tags-style.css';
 
 class CompanyForm extends React.Component {
   state = {
-    resources: [],
-    categories: [],
-    technologies: [],
+    resourcesSuggestions: [],
+    categoriesSuggestions: [],
+    technologiesSuggestions: [],
     name: '',
     url: '',
     foundingDate: '',
     sizeOrganization: 0,
     description: '',
+    resources: [],
+    categories: [],
+    technologies: [],
   };
   async componentDidMount() {
     const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
     results.then(axios.spread((resources, categories, technologies) => {
       this.setState({
-        resources: resources.data,
-        categories: categories.data,
-        technologies: technologies.data,
+        resourcesSuggestions: resources.data,
+        categoriesSuggestions: categories.data,
+        technologiesSuggestions: technologies.data,
       });
     }));
   }
@@ -38,16 +41,26 @@ class CompanyForm extends React.Component {
       [name]: value,
     });
   };
+  handleAddTag = (tag, stateName) => {
+    // const {technologies} = this.state;
+    const tags = [].concat(this.state[stateName], tag);
+    this.setState({
+      [stateName]: tags,
+    });
+  };
   render() {
     const {
-      resources,
-      categories,
-      technologies,
+      resourcesSuggestions,
+      categoriesSuggestions,
+      technologiesSuggestions,
       name,
       url,
       foundingDate,
       sizeOrganization,
       description,
+      resources,
+      categories,
+      technologies,
     } = this.state;
     return (
       <Row>
@@ -104,15 +117,33 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup controlId="resourcing-control">
               <ControlLabel>Resourcing</ControlLabel>
-              <TagSelector suggestions={resources} className="form-control" />
+              <TagSelector
+                className="form-control"
+                parentStateName="resources"
+                tags={resources}
+                suggestions={resourcesSuggestions}
+                handleAddition={this.handleAddTag}
+              />
             </FormGroup>
             <FormGroup controlId="categories-control">
               <ControlLabel>Categories</ControlLabel>
-              <TagSelector suggestions={categories} className="form-control" />
+              <TagSelector
+                className="form-control"
+                parentStateName="categories"
+                tags={categories}
+                suggestions={categoriesSuggestions}
+                handleAddition={this.handleAddTag}
+              />
             </FormGroup>
             <FormGroup controlId="technologies-control">
               <ControlLabel>Technologies</ControlLabel>
-              <TagSelector suggestions={technologies} className="form-control" />
+              <TagSelector
+                className="form-control"
+                parentStateName="technologies"
+                tags={technologies}
+                suggestions={technologiesSuggestions}
+                handleAddition={this.handleAddTag}
+              />
             </FormGroup>
             <Button type="submit" className="btn-send">
               Submit
