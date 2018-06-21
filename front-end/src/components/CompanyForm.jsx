@@ -42,8 +42,14 @@ class CompanyForm extends React.Component {
     });
   };
   handleAddTag = (tag, stateName) => {
-    // const {technologies} = this.state;
     const tags = [].concat(this.state[stateName], tag);
+    this.setState({
+      [stateName]: tags,
+    });
+  };
+  handleDeleteTag = (index, stateName) => {
+    const tags = this.state[stateName].slice(0); // get local copy of array
+    tags.splice(index, 1);
     this.setState({
       [stateName]: tags,
     });
@@ -123,6 +129,7 @@ class CompanyForm extends React.Component {
                 tags={resources}
                 suggestions={resourcesSuggestions}
                 handleAddition={this.handleAddTag}
+                handleDelete={this.handleDeleteTag}
               />
             </FormGroup>
             <FormGroup controlId="categories-control">
@@ -133,6 +140,7 @@ class CompanyForm extends React.Component {
                 tags={categories}
                 suggestions={categoriesSuggestions}
                 handleAddition={this.handleAddTag}
+                handleDelete={this.handleDeleteTag}
               />
             </FormGroup>
             <FormGroup controlId="technologies-control">
@@ -143,6 +151,7 @@ class CompanyForm extends React.Component {
                 tags={technologies}
                 suggestions={technologiesSuggestions}
                 handleAddition={this.handleAddTag}
+                handleDelete={this.handleDeleteTag}
               />
             </FormGroup>
             <Button type="submit" className="btn-send">
