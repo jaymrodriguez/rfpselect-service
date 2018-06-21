@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import moment from 'moment';
+
 import TagSelector from './TagSelector';
+import { createCompany } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 
 import '../css/tags-style.css';
@@ -30,9 +33,34 @@ class CompanyForm extends React.Component {
       });
     }));
   }
-  handleSubmit = (event) => {
+  validateInput = () => {};
+  handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target.description.value);
+    // should validate here
+    const {
+      name,
+      url,
+      foundingDate,
+      sizeOrganization,
+      description,
+      // resources,
+      // categories,
+      // technologies,
+    } = this.state;
+
+    const company = {
+      title: `${name}title`,
+      name,
+      url,
+      founding_date: moment(foundingDate).format('DD/MM/YYYY'),
+      size_of_organization: sizeOrganization,
+      description,
+      resourcing: 1,
+      categories: 2,
+      technologies: 3,
+    };
+    const thing = createCompany(company);
+    console.log(thing);
   };
   handleInputChange = (event) => {
     const { name, value } = event.target;
