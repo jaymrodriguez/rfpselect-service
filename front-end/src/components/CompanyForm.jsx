@@ -4,8 +4,10 @@ import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bo
 import moment from 'moment';
 
 import TagSelector from './TagSelector';
+import AlertBox from './AlertBox';
 import { createCompany } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
+import { STATUS_CODES } from '../helpers/enums';
 
 import '../css/tags-style.css';
 
@@ -60,7 +62,14 @@ class CompanyForm extends React.Component {
       technologies: technologies.map(tech => tech.id),
     };
     // TODO: print success
-    createCompany(company);
+    const promise = createCompany(company);
+    const response = await promise;
+
+    if (response.status !== STATUS_CODES.CREATED) {
+      // print validation errors
+    } else {
+      // print sucess
+    }
   };
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -182,8 +191,8 @@ class CompanyForm extends React.Component {
                 handleDelete={this.handleDeleteTag}
               />
             </FormGroup>
-            <Button type="submit" className="btn-send">
-              Submit
+            <Button type="submit" className="btn-send" bsStyle="primary" bsSize="large" block>
+              Add Company
             </Button>
           </form>
         </Col>

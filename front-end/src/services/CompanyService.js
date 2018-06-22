@@ -9,6 +9,6 @@ export const createCompany = async (companyInfo) => {
     const response = await axios.post('/companies/add', params);
     return response;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
