@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import validator from 'validator';
 import moment from 'moment';
 
 import TagSelector from './TagSelector';
@@ -13,6 +14,7 @@ import '../css/tags-style.css';
 
 class CompanyForm extends React.Component {
   state = {
+    sucess: false,
     resourcesSuggestions: [],
     categoriesSuggestions: [],
     technologiesSuggestions: [],
@@ -35,7 +37,11 @@ class CompanyForm extends React.Component {
       });
     }));
   }
-  validateInput = () => {};
+  validateInput = (fields) => {
+    fields.forEach(field => {
+      
+    });
+  };
   handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: should validate here
@@ -61,14 +67,16 @@ class CompanyForm extends React.Component {
       categories: categories.map(cat => cat.id),
       technologies: technologies.map(tech => tech.id),
     };
-    // TODO: print success
+
     const promise = createCompany(company);
     const response = await promise;
 
     if (response.status !== STATUS_CODES.CREATED) {
       // print validation errors
+      console.log(response);
     } else {
       // print sucess
+      this.setState({ sucess: true });
     }
   };
   handleInputChange = (event) => {
@@ -93,6 +101,7 @@ class CompanyForm extends React.Component {
   };
   render() {
     const {
+      sucess,
       resourcesSuggestions,
       categoriesSuggestions,
       technologiesSuggestions,
@@ -108,6 +117,7 @@ class CompanyForm extends React.Component {
     return (
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
+          {sucess ? <AlertBox title="Company has been created" type="success" /> : null}
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="name-control">
               <ControlLabel>Name</ControlLabel>
