@@ -52,7 +52,7 @@ class CompanyForm extends React.Component {
       title: `${name}title`,
       name,
       url,
-      founding_date: moment(foundingDate).format('DD/MM/YYYY'),
+      founding_date: moment(foundingDate).format('MM/DD/YYYY'),
       size_of_organization: sizeOrganization,
       description,
       resourcing: 1,
