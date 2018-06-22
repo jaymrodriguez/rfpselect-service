@@ -36,31 +36,31 @@ class CompanyForm extends React.Component {
   validateInput = () => {};
   handleSubmit = async (event) => {
     event.preventDefault();
-    // should validate here
+    // TODO: should validate here
     const {
       name,
       url,
       foundingDate,
       sizeOrganization,
       description,
-      // resources,
-      // categories,
-      // technologies,
+      resources,
+      categories,
+      technologies,
     } = this.state;
 
     const company = {
-      title: `${name}title`,
+      title: name,
       name,
       url,
       founding_date: moment(foundingDate).format('MM/DD/YYYY'),
       size_of_organization: sizeOrganization,
       description,
-      resourcing: 1,
-      categories: 2,
-      technologies: 3,
+      resourcing: resources.map(res => res.id),
+      categories: categories.map(cat => cat.id),
+      technologies: technologies.map(tech => tech.id),
     };
-    const thing = createCompany(company);
-    console.log(thing);
+    // TODO: print success
+    createCompany(company);
   };
   handleInputChange = (event) => {
     const { name, value } = event.target;
