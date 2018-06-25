@@ -26,6 +26,7 @@ class CompanyForm extends React.Component {
     resources: [],
     categories: [],
     technologies: [],
+    validationErrors: [],
   };
   async componentDidMount() {
     const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
@@ -37,10 +38,44 @@ class CompanyForm extends React.Component {
       });
     }));
   }
-  validateInput = (fields) => {
-    fields.forEach(field => {
-      
+  clearForm = () => {
+    this.setState({
+      resourcesSuggestions: [],
+      categoriesSuggestions: [],
+      technologiesSuggestions: [],
+      name: '',
+      url: '',
+      foundingDate: '',
+      sizeOrganization: 0,
+      description: '',
+      resources: [],
+      categories: [],
+      technologies: [],
     });
+  };
+  validateInput = (fields) => {
+    const validationErrors = [];
+    const rules = {
+      name: name =>
+        (validator.isLength(name, { min: 2, max: 255 })
+          ? false
+          : 'Name should be between 2 and 255 letters.'),
+      url: url => (validator.isURL(url) ? false : 'URL must be valid.'),
+      founding_date: date => (date !== 'Invalid date' ? false : 'Invalid date format.'),
+      sizeOrganization: size => (size > 3 ? false : 'Organization must have at least 4 members.'),
+      description: desc => (validator.isEmpty(desc) ? false : "Description can't be empty"),
+      resourcing: res => (!Array.isArray(res) ? false : 'Resourcing must be an array'),
+      categories: cat => (!Array.isArray(cat) ? false : 'Categories must be an array'),
+      technologies: tech => (!Array.isArray(tech) ? false : 'Technologies must be an array'),
+    };
+
+    Object.keys(rules).forEach((fieldName) => {
+      const error = rules[fieldName].call(null, fields[fieldName]);
+      if (error) {
+        validationErrors.push(error);
+      }
+    });
+    this.setState({ validationErrors });
   };
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,6 +89,7 @@ class CompanyForm extends React.Component {
       resources,
       categories,
       technologies,
+      validationErrors,
     } = this.state;
 
     const company = {
@@ -67,6 +103,12 @@ class CompanyForm extends React.Component {
       categories: categories.map(cat => cat.id),
       technologies: technologies.map(tech => tech.id),
     };
+    this.validateInput(company);
+
+    if (validationErrors.length > 0) {
+      this.setState({ validationErrors });
+      return;
+    }
 
     const promise = createCompany(company);
     const response = await promise;
@@ -77,6 +119,7 @@ class CompanyForm extends React.Component {
     } else {
       // print sucess
       this.setState({ sucess: true });
+      this.clearForm();
     }
   };
   handleInputChange = (event) => {
@@ -113,11 +156,13 @@ class CompanyForm extends React.Component {
       resources,
       categories,
       technologies,
+      validationErrors,
     } = this.state;
     return (
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
           {sucess ? <AlertBox title="Company has been created" type="success" /> : null}
+          <p>{validationErrors}</p>
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="name-control">
               <ControlLabel>Name</ControlLabel>
