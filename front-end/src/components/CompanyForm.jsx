@@ -116,7 +116,8 @@ class CompanyForm extends React.Component {
 
       if (response.status !== STATUS_CODES.CREATED) {
         // print validation errors
-        console.log(response);
+        const validationErrors = response.data.errors.map(error => `${error.msg} for ${error.param}`);
+        this.setState({ validationErrors });
       } else {
         // print sucess
         this.setState({ sucess: true });
