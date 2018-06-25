@@ -51,10 +51,13 @@ class CompanyForm extends React.Component {
       resources: [],
       categories: [],
       technologies: [],
+      validationErrors: [],
     });
   };
   validateInput = (fields) => {
     const validationErrors = [];
+    this.setState({ validationErrors }); // clean previous ones
+
     const rules = {
       name: name =>
         (validator.isLength(name, { min: 2, max: 255 })
@@ -62,11 +65,12 @@ class CompanyForm extends React.Component {
           : 'Name should be between 2 and 255 letters.'),
       url: url => (validator.isURL(url) ? false : 'URL must be valid.'),
       founding_date: date => (date !== 'Invalid date' ? false : 'Invalid date format.'),
-      sizeOrganization: size => (size > 3 ? false : 'Organization must have at least 4 members.'),
-      description: desc => (validator.isEmpty(desc) ? false : "Description can't be empty"),
-      resourcing: res => (!Array.isArray(res) ? false : 'Resourcing must be an array'),
-      categories: cat => (!Array.isArray(cat) ? false : 'Categories must be an array'),
-      technologies: tech => (!Array.isArray(tech) ? false : 'Technologies must be an array'),
+      size_of_organization: size =>
+        (size > 3 ? false : 'Organization must have at least 4 members.'),
+      description: desc => (!validator.isEmpty(desc) ? false : "Description can't be empty"),
+      resourcing: res => (res.length > 0 ? false : 'Must have at least one resourcing option.'),
+      categories: cat => (cat.length > 0 ? false : 'Must have at least one category option.'),
+      technologies: tech => (tech.length > 0 ? false : 'Must have at least one technology option'),
     };
 
     Object.keys(rules).forEach((fieldName) => {
@@ -76,10 +80,11 @@ class CompanyForm extends React.Component {
       }
     });
     this.setState({ validationErrors });
+    return validationErrors.length < 1;
   };
   handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: should validate here
+
     const {
       name,
       url,
@@ -89,7 +94,6 @@ class CompanyForm extends React.Component {
       resources,
       categories,
       technologies,
-      validationErrors,
     } = this.state;
 
     const company = {
@@ -103,23 +107,23 @@ class CompanyForm extends React.Component {
       categories: categories.map(cat => cat.id),
       technologies: technologies.map(tech => tech.id),
     };
-    this.validateInput(company);
 
-    if (validationErrors.length > 0) {
-      this.setState({ validationErrors });
-      return;
-    }
+    const isValid = this.validateInput(company);
 
-    const promise = createCompany(company);
-    const response = await promise;
+    if (isValid) {
+      const promise = createCompany(company);
+      const response = await promise;
 
-    if (response.status !== STATUS_CODES.CREATED) {
-      // print validation errors
-      console.log(response);
+      if (response.status !== STATUS_CODES.CREATED) {
+        // print validation errors
+        console.log(response);
+      } else {
+        // print sucess
+        this.setState({ sucess: true });
+        this.clearForm();
+      }
     } else {
-      // print sucess
-      this.setState({ sucess: true });
-      this.clearForm();
+      this.setState({ sucess: false });
     }
   };
   handleInputChange = (event) => {
@@ -162,7 +166,9 @@ class CompanyForm extends React.Component {
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
           {sucess ? <AlertBox title="Company has been created" type="success" /> : null}
-          <p>{validationErrors}</p>
+          {validationErrors.length > 0 ? (
+            <AlertBox title="There are some errors" type="danger" message={validationErrors} />
+          ) : null}
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="name-control">
               <ControlLabel>Name</ControlLabel>
