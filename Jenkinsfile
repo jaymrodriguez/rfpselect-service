@@ -74,17 +74,17 @@ node {
 
   stage('Build images') {
     build_image(imageTagService, "${serviceLayerPath}/")
-    // build_image(imageTagFrontend, "${frontendLayerPath}/")
+    build_image(imageTagFrontend, "${frontendLayerPath}/")
   }
 
   stage('Push image to registry') {
     push_image(imageTagService)
-    // push_image(imageTagFrontend)
+    push_image(imageTagFrontend)
   }
 
   stage("Deploy Application") {
     deploy_to_gcp(serviceLayerService, imageTagService, 'us.gcr.io/rfpselectdev/rfpselect-service:1.0.0', serviceLayerPath)
-    // deploy_to_gcp(frontendLayerService, imageTagFrontend, 'us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0', frontendLayerPath)
+    deploy_to_gcp(frontendLayerService, imageTagFrontend, 'us.gcr.io/rfpselectdev/rfpselect-frontend:1.0.0', frontendLayerPath)
   }
 
 }

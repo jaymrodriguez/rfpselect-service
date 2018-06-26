@@ -1,0 +1,13 @@
+const STATUS_CODES = {
+  OK: 200,
+  CREATED: 201,
+  NOT_FOUND: 404,
+  UNPROCESSABLE_ENTITY: 422,
+  SERVER_ERROR: 500,
+};
+
+Object.freeze(STATUS_CODES);
+
+module.exports = {
+  STATUS_CODES,
+};
