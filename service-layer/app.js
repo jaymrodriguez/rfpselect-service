@@ -5,12 +5,16 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const WP_API = require("./api/api");
+const cors = require('cors');
 
 const routes = require("./routes/index");
 // const usersRouter = require('./routes/users');
 // const companiesRouter = require('./routes/companies');
 
 const app = express();
+
+//enable cors requests
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
