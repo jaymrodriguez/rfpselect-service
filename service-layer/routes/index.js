@@ -66,9 +66,9 @@ router.put(
 );
 
 /* taxonomy routes. */
-router.get('/taxomies', catchErrors(taxonomyController.getTaxonomies));
-router.get('/taxomies/categories', catchErrors(taxonomyController.getCategories));
-router.get('/taxomies/resourcing', catchErrors(taxonomyController.getResourcing));
-router.get('/taxomies/technologies', catchErrors(taxonomyController.getTechnologies));
+router.get('/taxonomies', catchErrors(taxonomyController.getTaxonomies));
+router.get('/taxonomies/categories', catchErrors(taxonomyController.getCategories));
+router.get('/taxonomies/resourcing', catchErrors(taxonomyController.getResourcing));
+router.get('/taxonomies/technologies', catchErrors(taxonomyController.getTechnologies));
 
 module.exports = router;

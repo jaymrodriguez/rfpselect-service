@@ -1,0 +1,355 @@
+/*
+ Large desktop :1170px. */
+@media (min-width: 1200px) and (max-width: 1500px) {
+.header-bottom-area .main-menu ul#nav li{padding: 30px 12px;}
+.slider-fashion h2 {font-size: 48px;}
+.text {padding: 0 11em;}
+.read-more button {padding: 15px 75px;}
+.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li, .our-agent-page .single-agent .single-agent-content .agents-social-icon ul li {
+  margin: 1px;}
+.our-agent-page .single-agent .single-agent-content h3 a{font-size: 22px;}
+.single-properties-area .properties-informations .nav.nav-tabs li a {padding: 10px 23.5px;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 30px;}
+.header-bottom-area .logo {margin-top: 10px;}
+
+}
+/*
+ Large desktop :1170px. */
+@media (min-width: 1170px) and (max-width: 1199px) {
+.header-bottom-area .main-menu ul#nav li{padding: 30px 12px;}
+.slider-fashion h2 {font-size: 48px;}
+.text {padding: 0 11em;}
+.read-more button {padding: 15px 75px;}
+.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li, .our-agent-page .single-agent .single-agent-content .agents-social-icon ul li {
+  margin: 1px;}
+.single-client p::after {right: 1%;}
+.our-agent-page .single-agent .single-agent-content h3 a{font-size: 22px;}
+.single-properties-area .properties-informations .nav.nav-tabs li a {padding: 10px 23.5px;}
+.portfolio-item .property-price ul li.border-right{border-right: none;}
+.portfolio-item .property-price ul li.price {float: left;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 65px;}
+.header-bottom-area .logo {margin-top: 15px;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right{border-right: none;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price{float: left;}
+}
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1169px) {
+.container {width:950px;}
+.header-bottom-area .main-menu ul#nav li{padding: 30px 11px !important;}
+.header-bottom-area .header-search input[type="text"] {width: 230px;}
+.header-bottom-area .logo {  margin-top: 15px;}
+.text {  margin-bottom: 40px;padding: 0 1em;}
+.slider-fashion h2 {font-size: 40px;}
+#amount {text-align: left;}
+.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li {margin: 0px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-prev {left: -25px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-next {right: -25px;}
+.single-client p::after {right: 0%;}
+.blog-post1 h3 a {font-size: 18px;}
+.about-counter-list p {line-height: 20px;}
+.agents-area .agents-carousel-area .single-agent, .our-agent-page .single-agent {padding: 15px;}
+.single-properties-area .properties-informations .nav.nav-tabs li a {padding: 10px 22.5px;}
+.blog-page-area .all-blog-content-area .single-blog .blog-content-area h3 a {font-size: 17px;}
+.blog-page-area .all-blog-content-area .single-blog .blog-content-area h3 {margin-bottom: 5px;}
+.blog-page-area .all-blog-content-area .single-blog .blog-content-area .informations p {font-size: 17px;}
+.blog-page-area .all-blog-content-area .single-blog .blog-content-area .informations p {font-size: 16px;}
+.portfolio-item .property-price ul li.border-right{border-right: none;}
+.portfolio-item .property-price ul li.price {float: left;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right{border-right: none;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {float: left;}
+.page-header-area, .about-page-content-area, .project-activation-area, .agents-area, .client-logo-area, .footer-top-area, .section-padding, .book-apartment-area, .clients-area, .featured-property-area.section-padding.properties-page, .single-properties-area, .our-agent-page, .blog-page-area, .main-conatct-form-area, #property-info-area, .real-estate-area, .property-area{padding:60px 0;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 60%;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .price_filter #amount {text-align: left;}
+.contact-agent .agent-contact-form ul li{border:none;}
+.page-header-area h1{font-size: 40px;}
+.slider-area .slider-fashion h2{font-size: 48px;}
+.portfolio-item .property-price {padding: 15px 0;}
+.featured-property-area{padding-bottom: 0;}
+}
+
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+.container {width:750px;}
+.main-menu ul#nav li {padding: 30px 11px;}
+.header-bottom-area .header-search input[type="text"] {width: 230px;}
+.text {  margin-bottom: 40px;padding: 0 1em;}
+.slider-fashion h2 {font-size: 36px;}
+#amount {text-align: left;}
+.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li {margin: 0px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-prev {left: -25px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-next {right: -25px;}
+.single-client p::after {right: 13%; top: 40%;}
+.blog-post1 h3 a {font-size: 16px;}
+.read-more button {padding: 15px 70px;}
+.book-apartment-area .book-apartment h3 {font-size: 23px;}
+.book-apartment-area .book-apartment p {font-size: 19px;top: 70px;}
+.featured-filter ul li {padding: 15px 22px;}
+.header-bottom-area .logo { margin-top:5px;  text-align: center;}
+.main-menu ul#nav {margin-bottom: 0;text-align: center;margin: 0; padding: 0;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 100px;}
+.sidebar-area .find-propertise-sidebar h3 {font-size: 17px;}
+.bill-tower {float: inherit !important;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price {margin-top: 7px;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price span {left: 0;}
+.client-logo-area .single-logo {height: 116px;}
+.client-logo-area .owl-prev { left: -28px;}
+.client-logo-area .owl-next { right: -28px;}
+.footer-top-area .footer-heading h2 {  font-size: 25px;}
+.heading-margin h2 {  margin-left: 0;}
+.bill-tower {float: inherit !important;text-align: left;}
+.about-counter-list p {line-height: 20px;}
+.about-counter-list h1 {font-size: 40px;}
+.gallery-area .portfolioFilter a {margin: 5px 1px;}
+.single-properties-area .properties-informations .nav.nav-tabs li a {padding: 10px 9px;}
+.portfolio-item .property-price ul li.border-right{border-right: none;}
+.portfolio-item .property-price ul li.price {float: left;}
+.portfolio-item .property-price ul li a {font-size: 12px;}
+.portfolio-item .property-price ul li.border-right{padding-right: 0;}
+.portfolio-column-menu ul li {margin: 0 0 5px 0;}
+.blog-page-area .all-blog-content-area .single-blog .blog-content-area h3 a {font-size: 16px;}
+.page-header-area, .about-page-content-area, .project-activation-area, .agents-area, .client-logo-area, .footer-top-area, .section-padding, .book-apartment-area, .clients-area, .featured-property-area.section-padding.properties-page, .single-properties-area, .our-agent-page, .blog-page-area, .main-conatct-form-area, #property-info-area, .real-estate-area, .property-area, .featured-property-area{padding:60px 0;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .price_filter #amount {text-align: left;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right {
+  border-right: medium none;padding-right: 0}
+  .sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {
+    float: left;  }
+.page-header-area h1{font-size: 36px;}
+.slider-area .slider-fashion h2{font-size: 36px;}
+.featured-property-area{padding-bottom: 0;}
+.portfolio-column-menu ul li {padding: 10px 20px;}
+.agents-area .agents-carousel-area .single-agent {padding: 0;}
+.blog-area .blog-post1 h3 a {font-size: 14px;}
+.agent-top{margin-top: 30px;}
+}
+
+/* Large Mobile :480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+.container {width:450px;}
+.mobile-menu-area{display: block;}
+.header-area{display: none;}
+.main-menu ul#nav li {padding: 30px 11px;}
+.header-bottom-area .header-search input[type="text"] {width: 230px;}
+.text {  margin-bottom: 40px;padding: 0 1em;}
+.slider-fashion h2 {font-size: 20px;}
+#amount {text-align: left;}
+.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li {margin: 0px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-prev {left: -25px;}
+.agents-area .agents-carousel-area .owl-buttons .owl-next {right: -25px;}
+.slider-fixed-area .dream-home h3::after{display: none;}
+.single-client p::after {right: 15%;top: 40%;}
+.blog-post1 h3 a {font-size: 18px;}
+.read-more button {padding: 15px 125px;}
+.book-apartment-area .book-apartment h3 {font-size: 23px;}
+.book-apartment-area .book-apartment p {font-size: 19px;top: 70px;}
+.featured-filter ul li {padding: 15px 22px;margin: 3px 0;}
+.header-bottom-area .logo { margin-top:5px;  text-align: center;}
+.main-menu ul#nav {margin-bottom: 0;text-align: center;margin: 0; padding: 0;}
+.text {margin-bottom: 20px; padding: 0;}
+.heading-para p {padding: 0;}
+.post-img img {width: 100%;}
+.agents-area .agents-carousel-area .single-agent .single-agent-img {margin: 0 83px 25px;}
+.footer-heading {  margin-bottom: 30px;}
+.heading-margin h2{margin-left: 0;}
+.slider-fixed-area .dream-home h3 {bottom: 0; display: block; margin: 20px; position: inherit;}
+.featured-items {margin-left: 0;}
+.client-logo-area .single-logo {height: 90px;}
+.page-header-area h1 { font-size: 28px;  margin-bottom: 10px;}
+.contact-agent .agent-picture img {margin-bottom: 30px;}
+.about-counter-list {margin-bottom: 30px;}
+.about-counter-list p {line-height: 20px;}
+.about-counter-list h1 {font-size: 40px;}
+.single-properties-area .properties-informations .nav.nav-tabs li a {font-size: 14px;padding: 10px 11.7px;}
+.our-agent-page .single-agent {padding: 80px;}
+.blog-page-area .all-blog-content-area .single-blog .blog-image a i {top: 25%;}
+.pagination-area {margin-bottom: 50px;}
+.page-header-area, .about-page-content-area, .project-activation-area, .agents-area, .client-logo-area, .footer-top-area, .section-padding, .book-apartment-area, .clients-area, .featured-property-area.section-padding.properties-page, .single-properties-area, .our-agent-page, .blog-page-area, .main-conatct-form-area, #property-info-area, .real-estate-area, .property-area, .featured-property-area{padding:40px 0;}
+.portfolio-column-menu ul li {margin: 5px;display: block;}
+.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .price_filter #amount {text-align: left;}
+.slider-area .slider-fashion h2{font-size: 21px;}
+.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right {
+  border-right: medium none;padding-right: 0}
+.page-header-area h1{font-size: 36px;}
+.slider-area .slider-fashion h2{font-size: 21px;margin-bottom: 0}
+.featured-property-area{padding-bottom: 0;}
+.portfolio-column-menu ul li {padding: 10px 20px;}
+.agents-area .agents-carousel-area .single-agent {padding: 0;}
+.blog-area .blog-post1 h3 a {font-size: 14px;}
+.agent-top{margin-top: 30px;}
+.section-title h2{font-size: 24px;}
+.agents-area .agents-carousel-area .single-agent .single-agent-img .overley {width: 59%;}
+.single-news-page .news-body .informations ul li {display: block;}
+.contact-text h3 {font-size: 20px;}
+
+}
+ 
+/* Large Mobile :480px. */
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+	.container {width:300px;}
+	.mobile-menu-area{display: block;}
+	.header-area, .slider-content{display: none !important;}
+	#amount {text-align: left;}
+	.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li {margin: 0px;}
+	.agents-area .agents-carousel-area .owl-buttons .owl-prev {left: -25px;}
+	.agents-area .agents-carousel-area .owl-buttons .owl-next {right: -25px;}
+	.slider-fixed-area .dream-home h3::after, .bill-tower::before{display: none;}
+	.single-client p::after {right: 30%; top: 55%;}
+	.blog-post1 h3 a {font-size: 17px;}
+	.read-more button {padding: 15px 30px;}
+	.book-apartment-area .book-apartment h3 {font-size: 18px;}
+	.book-apartment-area .book-apartment p {font-size: 16px;top: 60px;}
+	.featured-filter ul li {padding: 15px 22px;margin: 3px 0;}
+	.header-bottom-area .logo { margin-top:5px;  text-align: center;}
+	.main-menu ul#nav {margin-bottom: 0;text-align: center;margin: 0; padding: 0;}
+	.text {margin-bottom: 20px; padding: 0;}
+	.heading-para p {padding: 0;margin: 0 0 20px}
+	.post-img img {width: 100%;}
+	.agents-area .agents-carousel-area .single-agent .single-agent-img {margin: 5px;}
+	.footer-heading {  margin-bottom: 30px;}
+	.heading-margin h2{margin-left: 0;}
+	.slider-fixed-area .dream-home h3 {bottom: 0; display: block; margin: 20px 0; position: inherit;}
+	.featured-items {margin-left: 0;}
+	.nivo-directionNav a { top: 28%;}
+	.common-heading h2 {font-size: 24px;}
+	.bill-tower {display: inline-block;float: inherit;position: relative;}
+	.price span {bottom: 0;display: block;float: inherit;margin: 0; position: inherit;  right: 0;}
+	.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li a {height: 37px;line-height: 37px;width: 37px;}
+	.single-client h3 {font-size: 30px;}
+	.featured-filter ul li {display: block; margin: 8px 0;}
+	.about-counter-list h1 {font-size: 30px;padding: 0 15px 30px;}
+	.about-counter-list { margin-bottom: 30px;}
+	.client-logo-area .single-logo {height: 90px;}
+	.page-header-area h1 { font-size: 28px;  margin-bottom: 10px;}
+	.single-properties-area .properties-informations .nav.nav-tabs li {border-bottom: 1px solid #dddddd !important;
+	display: block;float: inherit;}
+	.contact-agent .agent-picture img {margin-bottom: 30px;}
+	.our-agent-page .single-agent {padding: 20px;}
+	.pagination-area ul li a{width: 35px;}
+	.page-sidebar-area {  margin-top: 30px;}
+	.client-logo-area .owl-prev{left: -22px;}
+	.client-logo-area .owl-next{right: -22px;}
+	.single-news-page .comments-area .main-comments a { display: inline-block; float: inherit !important; padding-right: 0;}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price span {
+	position: inherit;}
+	.gallery-area .portfolioContainer .single-item { width: 100% !important;}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price {
+	margin-top: 8px;position: inherit;}
+.page-header-area, .about-page-content-area, .project-activation-area, .agents-area, .client-logo-area, .footer-top-area, .section-padding, .book-apartment-area, .clients-area, .featured-property-area.section-padding.properties-page, .single-properties-area, .our-agent-page, .blog-page-area, .main-conatct-form-area, #property-info-area, .real-estate-area, .property-area, .featured-property-area{padding:30px 0;}
+	.gallery-area .portfolioFilter a {margin: 5px;display: block;}
+	.portfolio-item .property-price ul li.border-right, .sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li a{border-right: none;}
+	.portfolio-item .property-price ul li.price, .sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {float: left;}
+	.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .price_filter #amount {text-align: left;}
+	.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 25px;}
+	.portfolio-item .property-price ul li.border-right{border-right: none;}
+	.portfolio-item .property-price ul li.price {float: left;}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right{border-right: none;}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {float: left;}
+	.portfolio-column-menu ul li {display: block;margin: 5px;}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right {
+	border-right: medium none;padding-right: 0}
+	.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {
+	float: left;  }
+	.page-header-area h1{font-size: 30px;}
+	.featured-property-area{padding-bottom: 0;}
+	.portfolio-column-menu ul li {padding: 10px 20px;}
+	.agents-area .agents-carousel-area .single-agent {padding: 0;}
+	.blog-area .blog-post1 h3 a {font-size: 14px;}
+	.agent-top{margin-top: 30px;}
+	.slider-area .slider-fashion h2{font-size: 21px;margin-bottom: 0}
+	.featured-property-area{padding-bottom: 0;}
+	.portfolio-column-menu ul li {padding: 10px 20px;}
+	.agents-area .agents-carousel-area .single-agent {padding: 0;}
+	.blog-area .blog-post1 h3 a {font-size: 14px;}
+	.section-title h2, .about-page-content-area .about-us-content h2 {font-size: 24px;}
+	.agents-area .agents-carousel-area .single-agent .single-agent-img .overley {width: 59%;}
+	.single-news-page .news-body .informations ul li {display: block;}
+	.contact-text h3,.contact-agent .agent-contact-form h3, .blog-page-area .all-blog-content-area .single-blog .blog-content-area h3 a{font-size: 20px;}
+	.portfolio-item .property-price{padding:15px 0;}
+.contact-text h3::after {top: 90px;}
+}
+
+/* Large Mobile :480px. */
+@media only screen and (max-width : 320px) {
+		.container {width:300px;}
+		.mobile-menu-area{display: block;}
+		.header-area, .slider-content{display: none !important;}
+		#amount {text-align: left;}
+		.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li {margin: 0px;}
+		.agents-area .agents-carousel-area .owl-buttons .owl-prev {left: -25px;}
+		.agents-area .agents-carousel-area .owl-buttons .owl-next {right: -25px;}
+		.slider-fixed-area .dream-home h3::after, .bill-tower::before{display: none;}
+		.single-client p::after {right: 30%; top: 55%;}
+		.blog-post1 h3 a {font-size: 17px;}
+		.read-more button {padding: 15px 30px;}
+		.book-apartment-area .book-apartment h3 {font-size: 18px;}
+		.book-apartment-area .book-apartment p {font-size: 16px;top: 60px;}
+		.featured-filter ul li {padding: 15px 22px;margin: 3px 0;}
+		.header-bottom-area .logo { margin-top:5px;  text-align: center;}
+		.main-menu ul#nav {margin-bottom: 0;text-align: center;margin: 0; padding: 0;}
+		.text {margin-bottom: 20px; padding: 0;}
+		.heading-para p {padding: 0;margin: 0 0 20px}
+		.post-img img {width: 100%;}
+		.agents-area .agents-carousel-area .single-agent .single-agent-img {margin: 5px;}
+		.footer-heading {  margin-bottom: 30px;}
+		.heading-margin h2{margin-left: 0;}
+		.slider-fixed-area .dream-home h3 {bottom: 0; display: block; margin: 20px 0; position: inherit;}
+		.featured-items {margin-left: 0;}
+		.nivo-directionNav a { top: 28%;}
+		.common-heading h2 {font-size: 24px;}
+		.bill-tower {display: inline-block;float: inherit;position: relative;}
+		.price span {bottom: 0;display: block;float: inherit;margin: 0; position: inherit;  right: 0;}
+		.agents-area .agents-carousel-area .single-agent .single-agent-content .agents-social-icon ul li a {height: 37px;line-height: 37px;width: 37px;}
+		.single-client h3 {font-size: 30px;}
+		.featured-filter ul li {display: block; margin: 8px 0;}
+		.about-counter-list h1 {font-size: 30px;padding: 0 15px 30px;}
+		.about-counter-list { margin-bottom: 30px;}
+		.client-logo-area .single-logo {height: 90px;}
+		.page-header-area h1 { font-size: 28px;  margin-bottom: 10px;}
+		.single-properties-area .properties-informations .nav.nav-tabs li {border-bottom: 1px solid #dddddd !important;
+		display: block;float: inherit;}
+		.contact-agent .agent-picture img {margin-bottom: 30px;}
+		.our-agent-page .single-agent {padding: 20px;}
+		.pagination-area ul li a{width: 35px;}
+		.page-sidebar-area {  margin-top: 30px;}
+		.client-logo-area .owl-prev{left: -22px;}
+		.client-logo-area .owl-next{right: -22px;}
+		.single-news-page .comments-area .main-comments a { display: inline-block; float: inherit !important; padding-right: 0;}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price span {
+		position: inherit;}
+		.gallery-area .portfolioContainer .single-item { width: 100% !important;}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .single-property .price {
+		margin-top: 8px;position: inherit;}
+	.page-header-area, .about-page-content-area, .project-activation-area, .agents-area, .client-logo-area, .footer-top-area, .section-padding, .book-apartment-area, .clients-area, .featured-property-area.section-padding.properties-page, .single-properties-area, .our-agent-page, .blog-page-area, .main-conatct-form-area, #property-info-area, .real-estate-area, .property-area, .featured-property-area{padding:30px 0;}
+		.gallery-area .portfolioFilter a {margin: 5px;display: block;}
+		.portfolio-item .property-price ul li.border-right, .sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li a{border-right: none;}
+		.portfolio-item .property-price ul li.price, .sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {float: left;}
+		.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .price_filter #amount {text-align: left;}
+		.sidebar-area .find-propertise-sidebar .listed-keyword ul li.price-area .read-more {left: 25px;}
+		.portfolio-item .property-price ul li.border-right{border-right: none;}
+		.portfolio-item .property-price ul li.price {float: left;}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right{border-right: none;}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {float: left;}
+		.portfolio-column-menu ul li {display: block;margin: 5px;}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.border-right {
+		border-right: medium none;padding-right: 0}
+		.sidebar-area .find-propertise-sidebar .related-property-sidebar .total-property-area .propery-area .property-price ul li.price {
+		float: left;  }
+		.page-header-area h1{font-size: 30px;}
+		.featured-property-area{padding-bottom: 0;}
+		.portfolio-column-menu ul li {padding: 10px 20px;}
+		.agents-area .agents-carousel-area .single-agent {padding: 0;}
+		.blog-area .blog-post1 h3 a {font-size: 14px;}
+		.agent-top{margin-top: 30px;}
+		.slider-area .slider-fashion h2{font-size: 21px;margin-bottom: 0}
+		.featured-property-area{padding-bottom: 0;}
+		.portfolio-column-menu ul li {padding: 10px 20px;}
+		.agents-area .agents-carousel-area .single-agent {padding: 0;}
+		.blog-area .blog-post1 h3 a {font-size: 14px;}
+		.section-title h2, .about-page-content-area .about-us-content h2 {font-size: 24px;}
+		.agents-area .agents-carousel-area .single-agent .single-agent-img .overley {width: 59%;}
+		.single-news-page .news-body .informations ul li {display: block;}
+		.contact-text h3,.contact-agent .agent-contact-form h3, .blog-page-area .all-blog-content-area .single-blog .blog-content-area h3 a{font-size: 20px;}
+		.portfolio-item .property-price{padding:15px 0;}
+	.contact-text h3::after {top: 90px;}
+}
