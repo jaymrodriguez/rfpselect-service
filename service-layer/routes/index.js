@@ -7,7 +7,7 @@ const locationController = require('../controllers/locationController');
 const taxonomyController = require('../controllers/taxonomyController');
 const { catchErrors } = require('../handlers/errorHandlers');
 const { runValidations } = require('../handlers/validationHandler');
-const { testESServer } = require('../api/elasticSearch');
+const { testESServer, simpleSearch } = require('../api/elasticSearch');
 const {
   companySchema, idSchema, companyIdSchema, locationSchema,
 } = require('../schema/schema');
@@ -74,5 +74,6 @@ router.get('/taxonomies/technologies', catchErrors(taxonomyController.getTechnol
 
 /* Elastic Seach */
 router.get('/search/test', testESServer);
+router.get('/search/:query', catchErrors(simpleSearch));
 
 module.exports = router;

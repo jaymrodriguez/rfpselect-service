@@ -1,7 +1,7 @@
 const elasticsearch = require('elasticsearch');
 
 const esClient = new elasticsearch.Client({
-  host: 'https://elasticsearch:9200/',
+  host: 'http://elasticsearch:9200/',
   log: 'trace',
 });
 
@@ -12,10 +12,26 @@ exports.testESServer = (req, res) => {
     },
     (error) => {
       if (error) {
-        res.json({ here: 'yes' });
+        res.json({ here: error });
       } else {
         res.json({ here: 'no' });
       }
     },
   );
+};
+
+exports.simpleSearch = async (req, res) => {
+  const results = await esClient.search({
+    index: 'rfpindex',
+    type: 'wpsolr_types',
+    body: {
+      query: {
+        match: {
+          content: req.params.query,
+        },
+      },
+    },
+  });
+
+  res.status(200).json(results);
 };
