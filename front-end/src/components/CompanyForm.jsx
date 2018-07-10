@@ -4,6 +4,7 @@ import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bo
 import validator from 'validator';
 import moment from 'moment';
 
+import LocationForm from './LocationForm';
 import TagSelector from './TagSelector';
 import AlertBox from './AlertBox';
 import { createCompany } from '../services/CompanyService';
@@ -210,6 +211,7 @@ class CompanyForm extends React.Component {
                 onChange={this.handleInputChange}
               />
             </FormGroup>
+            <LocationForm />
             <FormGroup controlId="description-control">
               <ControlLabel>Description</ControlLabel>
               <FormControl
