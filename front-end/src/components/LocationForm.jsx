@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ControlLabel, FormGroup, FormControl, Checkbox, Row, Col, Button } from 'react-bootstrap';
+import { ControlLabel, FormGroup, FormControl, Checkbox } from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 class LocationForm extends React.Component {
@@ -13,8 +13,9 @@ class LocationForm extends React.Component {
     is_hq: false,
   };
   handleInputChange = (event) => {
-    console.log(event.target);
-    const { name, value } = event.target;
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = event.target;
 
     this.setState({
       [name]: value,
@@ -68,7 +69,13 @@ class LocationForm extends React.Component {
         </FormGroup>
         <FormGroup controlId="country-control">
           <ControlLabel>Country</ControlLabel>
-          <CountryDropdown name="country" value={country} onChange={this.handleInputChange} />
+          <CountryDropdown
+            name="country"
+            value={country}
+            onChange={countryName =>
+              this.handleInputChange({ target: { name: 'country', value: countryName } })
+            }
+          />
         </FormGroup>
         <FormGroup controlId="state-region-control">
           <ControlLabel>State or Region</ControlLabel>
@@ -76,15 +83,15 @@ class LocationForm extends React.Component {
             country={country}
             name="state_region"
             value={state_region}
-            onChange={this.handleInputChange}
+            onChange={regionName =>
+              this.handleInputChange({ target: { name: 'region', value: regionName } })
+            }
           />
         </FormGroup>
-        <FormGroup>
-          {/* <ControlLabel>Is Headquarter?</ControlLabel> */}
-          <Checkbox checked={is_hq} name="is_hq" onChange={this.handleInputChange}>
-            Is Headquarter?
-          </Checkbox>
-        </FormGroup>
+        {/* <ControlLabel>Is Headquarter?</ControlLabel> */}
+        <Checkbox value={is_hq} name="is_hq" onChange={this.handleInputChange}>
+          Is Headquarter?
+        </Checkbox>
       </Fragment>
     );
   }
