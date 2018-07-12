@@ -20,14 +20,13 @@ export const locationRules = {
   zip_code: zip_code => (!validator.isEmpty(zip_code) ? false : "Zip Code can't be empty."),
   state_region: state_region =>
     (!validator.isEmpty(state_region) ? false : "Region can't be empty."),
-  country: country => (!validator.isISO31661Alpha2(country) ? false : 'Invalid value for country.'),
-  is_hq: is_hq => (!validator.isBoolean(is_hq) ? false : 'Invalid value for IS HQ.'),
+  country: country => (validator.isISO31661Alpha2(country) ? false : 'Invalid value for country.'),
+  is_hq: is_hq => (typeof is_hq === typeof true ? false : 'Invalid value for IS HQ.'),
 };
 
 export const runValidations = (fields, rules) => {
   const validationErrors = [];
-  //   this.setState({ validationErrors }); // clean previous ones
-
+  console.log(fields);
   Object.keys(rules).forEach((fieldName) => {
     const error = rules[fieldName].call(null, fields[fieldName]);
     if (error) {
@@ -36,9 +35,3 @@ export const runValidations = (fields, rules) => {
   });
   return validationErrors;
 };
-
-// module.exports = {
-//   runValidations,
-//   locationRules,
-//   companyRules,
-// };

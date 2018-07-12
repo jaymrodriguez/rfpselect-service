@@ -8,9 +8,8 @@ import TagSelector from './TagSelector';
 import AlertBox from './AlertBox';
 import { createCompany, createLocation } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
-import { STATUS_CODES } from '../helpers/enums';
+import { createResource } from '../services/Shared';
 import { runValidations, companyRules, locationRules } from '../helpers/validation';
-
 
 import '../css/tags-style.css';
 
@@ -29,7 +28,6 @@ class CompanyForm extends React.Component {
     categories: [],
     technologies: [],
     validationErrors: [],
-    // location: {
     address: '',
     address_2: '',
     city: '',
@@ -37,7 +35,6 @@ class CompanyForm extends React.Component {
     state_region: '',
     country: '',
     is_hq: false,
-    // },
   };
   async componentDidMount() {
     const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
@@ -66,63 +63,45 @@ class CompanyForm extends React.Component {
     });
   };
   validateInput = (company, location) => {
-    const validationErrors = [];
+    let validationErrors = [];
     this.setState({ validationErrors }); // clean previous ones
     const companyErrors = runValidations(company, companyRules);
     const locationErrors = runValidations(location, locationRules);
 
-    validationErrors.concat(companyErrors, locationErrors);
+
+    validationErrors = validationErrors.concat(companyErrors, locationErrors);
     this.setState({ validationErrors });
     return validationErrors.length < 1;
   };
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const {
-      name,
-      url,
-      foundingDate,
-      sizeOrganization,
-      description,
-      resources,
-      categories,
-      technologies,
-    } = this.state;
-
-    const company = {
-      title: name,
-      name,
-      url,
-      founding_date: moment(foundingDate).format('MM/DD/YYYY'),
-      size_of_organization: sizeOrganization,
-      description,
-      resourcing: resources.map(res => res.id),
-      categories: categories.map(cat => cat.id),
-      technologies: technologies.map(tech => tech.id),
-    };
-
+    const company = this.formatCompanyObject();
     const location = this.formatLocationObject();
 
     const isValid = this.validateInput(company, location);
 
     if (isValid) {
-      const promise = createCompany(company);
-      const response = await promise;
+      const companyRepsonse = await createResource(company, createCompany);
+      let { validationErrors } = this.state;
 
-      if (response.status !== STATUS_CODES.CREATED) {
+      if (companyRepsonse.errors) {
         // print validation errors
-        const validationErrors = response.data.errors.map(error => `${error.msg} for ${error.param}`);
+        validationErrors = [].concat(validationErrors, companyRepsonse.errors);
         this.setState({ validationErrors });
       } else {
-        // print sucess
-        this.setState({ sucess: true });
-        
-        console.log(response);
-        location.company_id = response.data.id;
+        console.log(companyRepsonse);
+        location.company_id = companyRepsonse.response.data.id;
         location.title = company.name;
-        const locationPromise = createLocation(location);
-        await locationPromise;
-        this.clearForm();
+        const locationPromise = await createResource(location, createLocation);
+        // await locationPromise;
+        if (locationPromise.errors) {
+          validationErrors = [].concat(validationErrors, locationPromise.errors);
+          this.setState({ validationErrors });
+        } else {
+          this.setState({ sucess: true });
+          this.clearForm();
+        }
       }
     } else {
       this.setState({ sucess: false });
@@ -168,6 +147,20 @@ class CompanyForm extends React.Component {
       is_hq: this.state.is_hq,
     };
     return location;
+  };
+  formatCompanyObject = () => {
+    const company = {
+      title: this.state.name,
+      name: this.state.name,
+      url: this.state.url,
+      founding_date: moment(this.state.foundingDate).format('MM/DD/YYYY'),
+      size_of_organization: this.state.sizeOrganization,
+      description: this.state.description,
+      resourcing: this.state.resources.map(res => res.id),
+      categories: this.state.categories.map(cat => cat.id),
+      technologies: this.state.technologies.map(tech => tech.id),
+    };
+    return company;
   };
   render() {
     const {
@@ -234,7 +227,12 @@ class CompanyForm extends React.Component {
                 onChange={this.handleInputChange}
               />
             </FormGroup>
-            <LocationForm location={location} change={this.handleInputChange} selectCountry={this.handleSelectCountry} selectRegion={this.handleSelectRegion} />
+            <LocationForm
+              location={location}
+              change={this.handleInputChange}
+              selectCountry={this.handleSelectCountry}
+              selectRegion={this.handleSelectRegion}
+            />
             <FormGroup controlId="description-control">
               <ControlLabel>Description</ControlLabel>
               <FormControl
