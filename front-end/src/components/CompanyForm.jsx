@@ -7,7 +7,7 @@ import moment from 'moment';
 import LocationForm from './LocationForm';
 import TagSelector from './TagSelector';
 import AlertBox from './AlertBox';
-import { createCompany } from '../services/CompanyService';
+import { createCompany, createLocation } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 import { STATUS_CODES } from '../helpers/enums';
 
@@ -28,6 +28,15 @@ class CompanyForm extends React.Component {
     categories: [],
     technologies: [],
     validationErrors: [],
+    // location: {
+    address: '',
+    address_2: '',
+    city: '',
+    zip_code: '',
+    state_region: '',
+    country: '',
+    is_hq: false,
+    // },
   };
   async componentDidMount() {
     const results = axios.all([getResourcing(), getCategories(), getTechnologies()]);
@@ -122,6 +131,12 @@ class CompanyForm extends React.Component {
       } else {
         // print sucess
         this.setState({ sucess: true });
+        const location = this.formatLocationObject();
+        console.log(response);
+        location.company_id = response.data.id;
+        location.title = company.name;
+        const locationPromise = createLocation(location);
+        await locationPromise;
         this.clearForm();
       }
     } else {
@@ -129,11 +144,20 @@ class CompanyForm extends React.Component {
     }
   };
   handleInputChange = (event) => {
-    const { name, value } = event.target;
+    const {target} = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const {name} = target;
 
     this.setState({
-      [name]: value,
+      [name]: value
     });
+  };
+  handleSelectCountry = (countryName) => {
+    this.setState({ country: countryName });
+  };
+
+  handleSelectRegion = (regionName) => {
+    this.setState({ state_region: regionName });
   };
   handleAddTag = (tag, stateName) => {
     const tags = [].concat(this.state[stateName], tag);
@@ -147,6 +171,27 @@ class CompanyForm extends React.Component {
     this.setState({
       [stateName]: tags,
     });
+  };
+  formatLocationObject = () => {
+    const {      
+      address,
+      address_2,
+      city,
+      zip_code,
+      state_region,
+      country,
+      is_hq,} = this.state; 
+
+      const location = {  
+        address,
+        address_2,
+        city,
+        zip_code,
+        state_region,
+        country,
+        is_hq,
+      };
+        return location;
   };
   render() {
     const {
@@ -164,6 +209,8 @@ class CompanyForm extends React.Component {
       technologies,
       validationErrors,
     } = this.state;
+    const location = this.formatLocationObject();
+
     return (
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
@@ -211,7 +258,7 @@ class CompanyForm extends React.Component {
                 onChange={this.handleInputChange}
               />
             </FormGroup>
-            <LocationForm />
+            <LocationForm location={location} change={this.handleInputChange} selectCountry={this.handleSelectCountry} selectRegion={this.handleSelectRegion} />
             <FormGroup controlId="description-control">
               <ControlLabel>Description</ControlLabel>
               <FormControl
