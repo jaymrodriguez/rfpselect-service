@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import { ControlLabel, FormGroup, FormControl, Row, Col, Button, HelpBlock } from 'react-bootstrap';
 import moment from 'moment';
 
 import LocationForm from './LocationForm';
@@ -27,7 +27,7 @@ class CompanyForm extends React.Component {
     resources: [],
     categories: [],
     technologies: [],
-    validationErrors: [],
+    validationErrors: {},
     address: '',
     address_2: '',
     city: '',
@@ -63,15 +63,18 @@ class CompanyForm extends React.Component {
     });
   };
   validateInput = (company, location) => {
-    let validationErrors = [];
+    let validationErrors = {};
     this.setState({ validationErrors }); // clean previous ones
     const companyErrors = runValidations(company, companyRules);
     const locationErrors = runValidations(location, locationRules);
 
+    validationErrors = {
+      ...companyErrors,
+      ...locationErrors,
+    };
 
-    validationErrors = validationErrors.concat(companyErrors, locationErrors);
     this.setState({ validationErrors });
-    return validationErrors.length < 1;
+    return Object.keys(validationErrors).length < 1;
   };
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -162,6 +165,10 @@ class CompanyForm extends React.Component {
     };
     return company;
   };
+  displayValidationError = (propertyName) => {
+    const { validationErrors } = this.state;
+    return Object.prototype.hasOwnProperty.call(validationErrors, propertyName) ? 'error' : null;
+  };
   render() {
     const {
       sucess,
@@ -184,11 +191,15 @@ class CompanyForm extends React.Component {
       <Row>
         <Col xs={12} sm={9} md={3} lg={9}>
           {sucess ? <AlertBox title="Company has been created" type="success" /> : null}
-          {validationErrors.length > 0 ? (
+          {/* {validationErrors.length > 0 ? (
             <AlertBox title="There are some errors" type="danger" message={validationErrors} />
-          ) : null}
+          ) : null} */}
+          {console.log(validationErrors)}
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="name-control">
+            <FormGroup
+              controlId="name-control"
+              validationState={this.displayValidationError('name')}
+            >
               <ControlLabel>Name</ControlLabel>
               <FormControl
                 type="text"
@@ -197,8 +208,12 @@ class CompanyForm extends React.Component {
                 value={name}
                 onChange={this.handleInputChange}
               />
+              <HelpBlock>{validationErrors.name}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId="url-control">
+            <FormGroup
+              controlId="url-control"
+              validationState={this.displayValidationError('url')}
+            >
               <ControlLabel>URL</ControlLabel>
               <FormControl
                 type="url"
@@ -207,8 +222,12 @@ class CompanyForm extends React.Component {
                 value={url}
                 onChange={this.handleInputChange}
               />
+              <HelpBlock>{validationErrors.url}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId="founding-date-control">
+            <FormGroup
+              controlId="founding-date-control"
+              validationState={this.displayValidationError('founding_date')}
+            >
               <ControlLabel>Founding Date</ControlLabel>
               <FormControl
                 type="date"
@@ -216,8 +235,12 @@ class CompanyForm extends React.Component {
                 value={foundingDate}
                 onChange={this.handleInputChange}
               />
+              <HelpBlock>{validationErrors.founding_date}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId="size-organization-control">
+            <FormGroup
+              controlId="size-organization-control"
+              validationState={this.displayValidationError('size_of_organization')}
+            >
               <ControlLabel>Size Of Organization</ControlLabel>
               <FormControl
                 type="Number"
@@ -226,14 +249,19 @@ class CompanyForm extends React.Component {
                 value={sizeOrganization}
                 onChange={this.handleInputChange}
               />
+              <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
             </FormGroup>
             <LocationForm
               location={location}
               change={this.handleInputChange}
               selectCountry={this.handleSelectCountry}
               selectRegion={this.handleSelectRegion}
+              validationErrors={validationErrors}
             />
-            <FormGroup controlId="description-control">
+            <FormGroup
+              controlId="description-control"
+              validationState={this.displayValidationError('description')}
+            >
               <ControlLabel>Description</ControlLabel>
               <FormControl
                 componentClass="textarea"
@@ -242,8 +270,12 @@ class CompanyForm extends React.Component {
                 value={description}
                 onChange={this.handleInputChange}
               />
+              <HelpBlock>{validationErrors.description}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId="resourcing-control">
+            <FormGroup
+              controlId="resourcing-control"
+              validationState={this.displayValidationError('resourcing')}
+            >
               <ControlLabel>Resourcing</ControlLabel>
               <TagSelector
                 className="form-control"
@@ -253,8 +285,12 @@ class CompanyForm extends React.Component {
                 handleAddition={this.handleAddTag}
                 handleDelete={this.handleDeleteTag}
               />
+              <HelpBlock>{validationErrors.resourcing}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId="categories-control">
+            <FormGroup
+              controlId="categories-control"
+              validationState={this.displayValidationError('categories')}
+            >
               <ControlLabel>Categories</ControlLabel>
               <TagSelector
                 className="form-control"
@@ -264,8 +300,14 @@ class CompanyForm extends React.Component {
                 handleAddition={this.handleAddTag}
                 handleDelete={this.handleDeleteTag}
               />
+              <HelpBlock>{validationErrors.categories}</HelpBlock>
+
             </FormGroup>
-            <FormGroup controlId="technologies-control">
+            <FormGroup
+              controlId="technologies-control"
+              validationState={this.displayValidationError('technologies')}
+
+            >
               <ControlLabel>Technologies</ControlLabel>
               <TagSelector
                 className="form-control"
@@ -275,6 +317,8 @@ class CompanyForm extends React.Component {
                 handleAddition={this.handleAddTag}
                 handleDelete={this.handleDeleteTag}
               />
+              <HelpBlock>{validationErrors.technologies}</HelpBlock>
+
             </FormGroup>
             <Button type="submit" className="btn-send" bsStyle="primary" bsSize="large" block>
               Add Company

@@ -9,9 +9,9 @@ export const companyRules = {
   founding_date: date => (date !== 'Invalid date' ? false : 'Invalid date format.'),
   size_of_organization: size => (size > 3 ? false : 'Organization must have at least 4 members.'),
   description: desc => (!validator.isEmpty(desc) ? false : "Description can't be empty"),
-  resourcing: res => (res.length > 0 ? false : 'Must have at least one resourcing option.'),
-  categories: cat => (cat.length > 0 ? false : 'Must have at least one category option.'),
-  technologies: tech => (tech.length > 0 ? false : 'Must have at least one technology option'),
+  resourcing: res => (res.length > 0 ? false : 'Select one or more options.'),
+  categories: cat => (cat.length > 0 ? false : 'Select one or more options.'),
+  technologies: tech => (tech.length > 0 ? false : 'Select one or more options.'),
 };
 
 export const locationRules = {
@@ -25,12 +25,15 @@ export const locationRules = {
 };
 
 export const runValidations = (fields, rules) => {
-  const validationErrors = [];
-  console.log(fields);
+  let validationErrors = {};
+
   Object.keys(rules).forEach((fieldName) => {
     const error = rules[fieldName].call(null, fields[fieldName]);
     if (error) {
-      validationErrors.push(error);
+      validationErrors = {
+        ...validationErrors,
+        [fieldName]: error,
+      };
     }
   });
   return validationErrors;

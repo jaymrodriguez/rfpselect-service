@@ -14,9 +14,7 @@ export const createCompany = async (companyInfo) => {
 };
 
 export const createLocation = async (location) => {
-  console.log(location);
   const params = qs.stringify(location, { indices: false });
-  console.log(params);
   try {
     const response = await axios.post(`${baseURL}/locations/add`, params);
     return response;
