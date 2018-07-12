@@ -4,7 +4,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import PropTypes from 'prop-types';
 
 const LocationForm = ({
-  location, change, selectCountry, selectRegion,
+  location, change, selectCountry, selectRegion, validationErrors,
 }) => (
   <Fragment>
     <FormGroup controlId="address-control">
@@ -81,6 +81,15 @@ LocationForm.propTypes = {
     state_region: PropTypes.string,
     country: PropTypes.string,
     is_hq: PropTypes.bool,
+  }).isRequired,
+  validationErrors: PropTypes.shape({
+    address: PropTypes.string,
+    address_2: PropTypes.string,
+    city: PropTypes.string,
+    zip_code: PropTypes.string,
+    state_region: PropTypes.string,
+    country: PropTypes.string,
+    is_hq: PropTypes.string,
   }).isRequired,
   change: PropTypes.func.isRequired,
   selectCountry: PropTypes.func.isRequired,
