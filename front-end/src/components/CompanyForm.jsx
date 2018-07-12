@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { ControlLabel, FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
-import validator from 'validator';
 import moment from 'moment';
 
 import LocationForm from './LocationForm';
@@ -10,6 +9,8 @@ import AlertBox from './AlertBox';
 import { createCompany, createLocation } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 import { STATUS_CODES } from '../helpers/enums';
+import { runValidations, companyRules, locationRules } from '../helpers/validation';
+
 
 import '../css/tags-style.css';
 
@@ -64,31 +65,13 @@ class CompanyForm extends React.Component {
       validationErrors: [],
     });
   };
-  validateInput = (fields) => {
+  validateInput = (company, location) => {
     const validationErrors = [];
     this.setState({ validationErrors }); // clean previous ones
+    const companyErrors = runValidations(company, companyRules);
+    const locationErrors = runValidations(location, locationRules);
 
-    const rules = {
-      name: name =>
-        (validator.isLength(name, { min: 2, max: 255 })
-          ? false
-          : 'Name should be between 2 and 255 letters.'),
-      url: url => (validator.isURL(url) ? false : 'URL must be valid.'),
-      founding_date: date => (date !== 'Invalid date' ? false : 'Invalid date format.'),
-      size_of_organization: size =>
-        (size > 3 ? false : 'Organization must have at least 4 members.'),
-      description: desc => (!validator.isEmpty(desc) ? false : "Description can't be empty"),
-      resourcing: res => (res.length > 0 ? false : 'Must have at least one resourcing option.'),
-      categories: cat => (cat.length > 0 ? false : 'Must have at least one category option.'),
-      technologies: tech => (tech.length > 0 ? false : 'Must have at least one technology option'),
-    };
-
-    Object.keys(rules).forEach((fieldName) => {
-      const error = rules[fieldName].call(null, fields[fieldName]);
-      if (error) {
-        validationErrors.push(error);
-      }
-    });
+    validationErrors.concat(companyErrors, locationErrors);
     this.setState({ validationErrors });
     return validationErrors.length < 1;
   };
@@ -118,7 +101,9 @@ class CompanyForm extends React.Component {
       technologies: technologies.map(tech => tech.id),
     };
 
-    const isValid = this.validateInput(company);
+    const location = this.formatLocationObject();
+
+    const isValid = this.validateInput(company, location);
 
     if (isValid) {
       const promise = createCompany(company);
@@ -131,7 +116,7 @@ class CompanyForm extends React.Component {
       } else {
         // print sucess
         this.setState({ sucess: true });
-        const location = this.formatLocationObject();
+        
         console.log(response);
         location.company_id = response.data.id;
         location.title = company.name;
@@ -144,12 +129,12 @@ class CompanyForm extends React.Component {
     }
   };
   handleInputChange = (event) => {
-    const {target} = event;
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const {name} = target;
+    const { name } = target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
   handleSelectCountry = (countryName) => {
@@ -173,25 +158,16 @@ class CompanyForm extends React.Component {
     });
   };
   formatLocationObject = () => {
-    const {      
-      address,
-      address_2,
-      city,
-      zip_code,
-      state_region,
-      country,
-      is_hq,} = this.state; 
-
-      const location = {  
-        address,
-        address_2,
-        city,
-        zip_code,
-        state_region,
-        country,
-        is_hq,
-      };
-        return location;
+    const location = {
+      address: this.state.address,
+      address_2: this.state.address_2,
+      city: this.state.city,
+      zip_code: this.state.zip_code,
+      state_region: this.state.state_region,
+      country: this.state.country,
+      is_hq: this.state.is_hq,
+    };
+    return location;
   };
   render() {
     const {
