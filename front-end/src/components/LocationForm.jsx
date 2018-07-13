@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import { ControlLabel, FormGroup, FormControl, Checkbox } from 'react-bootstrap';
+import { ControlLabel, FormGroup, FormControl, Checkbox, HelpBlock } from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import PropTypes from 'prop-types';
+
+import { displayValidationError } from '../helpers/validation';
 
 const LocationForm = ({
   location, change, selectCountry, selectRegion, validationErrors,
@@ -16,6 +18,7 @@ const LocationForm = ({
         value={location.address}
         onChange={change}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="address2-control">
       <ControlLabel>Address 2</ControlLabel>
@@ -26,6 +29,7 @@ const LocationForm = ({
         value={location.address_2}
         onChange={change}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="city-control">
       <ControlLabel>City</ControlLabel>
@@ -36,6 +40,7 @@ const LocationForm = ({
         value={location.city}
         onChange={change}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="zip-code-control">
       <ControlLabel>Zip Code</ControlLabel>
@@ -46,6 +51,7 @@ const LocationForm = ({
         value={location.zip_code}
         onChange={change}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="country-control">
       <ControlLabel>Country</ControlLabel>
@@ -55,6 +61,7 @@ const LocationForm = ({
         value={location.country}
         onChange={selectCountry}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="state-region-control">
       <ControlLabel>State or Region</ControlLabel>
@@ -65,10 +72,12 @@ const LocationForm = ({
         value={location.state_region}
         onChange={selectRegion}
       />
+      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
     <Checkbox value={location.is_hq} name="is_hq" onChange={change}>
       Is Headquarter?
     </Checkbox>
+    <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
   </Fragment>
 );
 

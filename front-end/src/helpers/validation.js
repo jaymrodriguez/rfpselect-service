@@ -38,3 +38,5 @@ export const runValidations = (fields, rules) => {
   });
   return validationErrors;
 };
+
+export const displayValidationError = (propertyName, validationErrors) => (Object.prototype.hasOwnProperty.call(validationErrors, propertyName) ? 'error' : null);

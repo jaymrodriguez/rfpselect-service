@@ -9,7 +9,7 @@ import AlertBox from './AlertBox';
 import { createCompany, createLocation } from '../services/CompanyService';
 import { getResourcing, getCategories, getTechnologies } from '../services/TaxonomyService';
 import { createResource } from '../services/Shared';
-import { runValidations, companyRules, locationRules } from '../helpers/validation';
+import { runValidations, companyRules, locationRules, displayValidationError } from '../helpers/validation';
 
 import '../css/tags-style.css';
 
@@ -165,10 +165,6 @@ class CompanyForm extends React.Component {
     };
     return company;
   };
-  displayValidationError = (propertyName) => {
-    const { validationErrors } = this.state;
-    return Object.prototype.hasOwnProperty.call(validationErrors, propertyName) ? 'error' : null;
-  };
   render() {
     const {
       sucess,
@@ -198,7 +194,7 @@ class CompanyForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup
               controlId="name-control"
-              validationState={this.displayValidationError('name')}
+              validationState={displayValidationError('name')}
             >
               <ControlLabel>Name</ControlLabel>
               <FormControl
@@ -212,7 +208,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="url-control"
-              validationState={this.displayValidationError('url')}
+              validationState={displayValidationError('url')}
             >
               <ControlLabel>URL</ControlLabel>
               <FormControl
@@ -226,7 +222,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="founding-date-control"
-              validationState={this.displayValidationError('founding_date')}
+              validationState={displayValidationError('founding_date')}
             >
               <ControlLabel>Founding Date</ControlLabel>
               <FormControl
@@ -239,7 +235,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="size-organization-control"
-              validationState={this.displayValidationError('size_of_organization')}
+              validationState={displayValidationError('size_of_organization')}
             >
               <ControlLabel>Size Of Organization</ControlLabel>
               <FormControl
@@ -260,7 +256,7 @@ class CompanyForm extends React.Component {
             />
             <FormGroup
               controlId="description-control"
-              validationState={this.displayValidationError('description')}
+              validationState={displayValidationError('description')}
             >
               <ControlLabel>Description</ControlLabel>
               <FormControl
@@ -274,7 +270,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="resourcing-control"
-              validationState={this.displayValidationError('resourcing')}
+              validationState={displayValidationError('resourcing')}
             >
               <ControlLabel>Resourcing</ControlLabel>
               <TagSelector
@@ -289,7 +285,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="categories-control"
-              validationState={this.displayValidationError('categories')}
+              validationState={displayValidationError('categories')}
             >
               <ControlLabel>Categories</ControlLabel>
               <TagSelector
@@ -305,8 +301,7 @@ class CompanyForm extends React.Component {
             </FormGroup>
             <FormGroup
               controlId="technologies-control"
-              validationState={this.displayValidationError('technologies')}
-
+              validationState={displayValidationError('technologies')}
             >
               <ControlLabel>Technologies</ControlLabel>
               <TagSelector
@@ -318,7 +313,6 @@ class CompanyForm extends React.Component {
                 handleDelete={this.handleDeleteTag}
               />
               <HelpBlock>{validationErrors.technologies}</HelpBlock>
-
             </FormGroup>
             <Button type="submit" className="btn-send" bsStyle="primary" bsSize="large" block>
               Add Company
