@@ -9,7 +9,10 @@ const LocationForm = ({
   location, change, selectCountry, selectRegion, validationErrors,
 }) => (
   <Fragment>
-    <FormGroup controlId="address-control">
+    <FormGroup
+      controlId="address-control"
+      validationState={displayValidationError('address', validationErrors)}
+    >
       <ControlLabel>Address</ControlLabel>
       <FormControl
         type="text"
@@ -18,7 +21,7 @@ const LocationForm = ({
         value={location.address}
         onChange={change}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+      <HelpBlock>{validationErrors.address}</HelpBlock>
     </FormGroup>
     <FormGroup controlId="address2-control">
       <ControlLabel>Address 2</ControlLabel>
@@ -29,9 +32,11 @@ const LocationForm = ({
         value={location.address_2}
         onChange={change}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
     </FormGroup>
-    <FormGroup controlId="city-control">
+    <FormGroup
+      controlId="city-control"
+      validationState={displayValidationError('city', validationErrors)}
+    >
       <ControlLabel>City</ControlLabel>
       <FormControl
         type="text"
@@ -40,9 +45,12 @@ const LocationForm = ({
         value={location.city}
         onChange={change}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+      <HelpBlock>{validationErrors.city}</HelpBlock>
     </FormGroup>
-    <FormGroup controlId="zip-code-control">
+    <FormGroup
+      controlId="zip-code-control"
+      validationState={displayValidationError('zip_code', validationErrors)}
+    >
       <ControlLabel>Zip Code</ControlLabel>
       <FormControl
         type="text"
@@ -51,9 +59,12 @@ const LocationForm = ({
         value={location.zip_code}
         onChange={change}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+      <HelpBlock>{validationErrors.zip_code}</HelpBlock>
     </FormGroup>
-    <FormGroup controlId="country-control">
+    <FormGroup
+      controlId="country-control"
+      validationState={displayValidationError('country', validationErrors)}
+    >
       <ControlLabel>Country</ControlLabel>
       <CountryDropdown
         name="country"
@@ -61,9 +72,12 @@ const LocationForm = ({
         value={location.country}
         onChange={selectCountry}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+      <HelpBlock>{validationErrors.country}</HelpBlock>
     </FormGroup>
-    <FormGroup controlId="state-region-control">
+    <FormGroup
+      controlId="state-region-control"
+      validationState={displayValidationError('state_region', validationErrors)}
+    >
       <ControlLabel>State or Region</ControlLabel>
       <RegionDropdown
         country={location.country}
@@ -72,12 +86,17 @@ const LocationForm = ({
         value={location.state_region}
         onChange={selectRegion}
       />
-      <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+      <HelpBlock>{validationErrors.state_region}</HelpBlock>
     </FormGroup>
-    <Checkbox value={location.is_hq} name="is_hq" onChange={change}>
-      Is Headquarter?
-    </Checkbox>
-    <HelpBlock>{validationErrors.size_of_organization}</HelpBlock>
+    <FormGroup
+      controlId="is-hq-control"
+      validationState={displayValidationError('is_hq', validationErrors)}
+    >
+      <Checkbox value={location.is_hq} name="is_hq" onChange={change}>
+        Is Headquarter?
+      </Checkbox>
+      <HelpBlock>{validationErrors.is_hq}</HelpBlock>
+    </FormGroup>
   </Fragment>
 );
 
