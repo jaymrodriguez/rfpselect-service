@@ -56,7 +56,6 @@ exports.locationSchema = [
     .customSanitizer(inHTMLData),
   check('country').isISO31661Alpha2(),
   check('state_region')
-    .isAlpha()
     .not()
     .isEmpty()
     .escape()
