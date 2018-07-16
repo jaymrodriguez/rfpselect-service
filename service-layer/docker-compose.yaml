@@ -3,12 +3,14 @@ services:
   node:
     build: .
     # image: "us.gcr.io/rfpselectdev/rfpselect-service:latest"
+    command: yarn debug
     ports:
       - "8001:3000"
+      - "9229:9229"
     environment:
-      # - env=development
       - NODE_ENV=development
       - WP_URL=http://wp/wp-json
+      # - DEBUG=rfpselect-service:*
     volumes: 
       - ./controllers:/usr/src/app/controllers
 
