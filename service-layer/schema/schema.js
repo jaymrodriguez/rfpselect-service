@@ -43,14 +43,12 @@ exports.locationSchema = [
     .trim()
     .customSanitizer(inHTMLData),
   check('city')
-    .isAlpha()
     .not()
     .isEmpty()
     .escape()
     .trim()
     .customSanitizer(inHTMLData),
   check('zip_code')
-    .isAlphanumeric()
     .not()
     .isEmpty()
     .escape()
@@ -58,7 +56,6 @@ exports.locationSchema = [
     .customSanitizer(inHTMLData),
   check('country').isISO31661Alpha2(),
   check('state_region')
-    .isAlpha()
     .not()
     .isEmpty()
     .escape()
