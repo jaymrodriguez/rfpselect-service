@@ -3,7 +3,8 @@ services:
   node:
     build: .
     # image: "us.gcr.io/rfpselectdev/rfpselect-service:latest"
-    command: yarn debug
+    # command: yarn debug
+    command: yarn start
     ports:
       - "8001:3000"
       - "9229:9229"
