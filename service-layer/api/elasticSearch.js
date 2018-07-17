@@ -44,10 +44,8 @@ exports.companySearch = async (req, res) => {
       query: {
         bool: {
           must: {
-            multi_match: {
-              query: req.params.query,
-              // fields: ['categories_str', 'technologies_str', 'name_str'],
-              fields: ['title', 'name_str'],
+            match: {
+              content: req.params.query,
             },
           },
           filter: {
@@ -67,14 +65,21 @@ exports.companySearch = async (req, res) => {
 //     type: 'wpsolr_types',
 //     body: {
 //       query: {
-//         multi_match: {
-//           query: req.params.query,
-//           // fields: ['categories_str', 'technologies_str', 'name_str'],
-//           fields: ['title', 'name_str'],
+//         bool: {
+//           must: {
+//             multi_match: {
+//               query: req.params.query,
+//               type: 'cross_fields',
+//               // type: 'best_fields',
+//               // analyzer: 'standard',
+//               fields: ['title', 'categories_str', 'technologies_str'],
+//               // operator: 'and',
+//             },
+//           },
+//           filter: {
+//             term: { type: 'company' },
+//           },
 //         },
-//       },
-//       filter: {
-//         term: { type: 'company' },
 //       },
 //     },
 //   });

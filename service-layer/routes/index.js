@@ -75,5 +75,5 @@ router.get('/taxonomies/technologies', catchErrors(taxonomyController.getTechnol
 /* Elastic Seach */
 router.get('/search/test', testESServer);
 router.get('/search/:query', catchErrors(companySearch));
-
+router.get('/searchx/:query', catchErrors(simpleSearch));
 module.exports = router;
