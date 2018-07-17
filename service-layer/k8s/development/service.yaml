@@ -22,3 +22,5 @@ spec:
               value: "development"
             - name: "WP_URL"
               value: "http://35.199.27.199:8000/wp-json"
+            - name: "ES_URL"
+              value: "http://35.236.208.235:9200/"
