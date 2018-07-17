@@ -11,6 +11,7 @@ services:
     environment:
       - NODE_ENV=development
       - WP_URL=http://wp/wp-json
+      - ES_URL=http://elasticsearch:9200/
       # - DEBUG=rfpselect-service:*
     volumes: 
       - ./controllers:/usr/src/app/controllers
