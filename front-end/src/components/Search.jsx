@@ -1,15 +1,15 @@
 import React from 'react';
-import { ReactiveBase, CategorySearch } from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
 
 class Search extends React.Component {
   state = {};
   render = () => (
     <ReactiveBase app="rfpindex" url="http://localhost:9200">
-      <CategorySearch
+      <DataSearch
         componentId="searchbox"
-        dataField={['name_str', 'technologies_str']}
+        dataField="title"
         categoryField="title"
-        placeholder="Search Companies"
+        placeholder="Search Companiesxx"
       />
     </ReactiveBase>
   );

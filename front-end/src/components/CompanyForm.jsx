@@ -195,7 +195,7 @@ class CompanyForm extends React.Component {
           {/* {validationErrors.length > 0 ? (
             <AlertBox title="There are some errors" type="danger" message={validationErrors} />
           ) : null} */}
-          {console.log(validationErrors)}
+          {/* {console.log(validationErrors)} */}
           <form onSubmit={this.handleSubmit}>
             <FormGroup
               controlId="name-control"
