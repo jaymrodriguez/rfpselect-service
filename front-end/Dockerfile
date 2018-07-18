@@ -81,7 +81,7 @@ FROM nginx:1.14.0-alpine
 # RUN yarn build
 
 # RUN rm -rf /etc/nginx/conf.d
-# COPY conf /etc/nginx
+COPY conf /etc/nginx
 
 # WORKDIR /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
