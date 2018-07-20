@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ReactiveBase,
-  DataSearch,
-  CategorySearch,
-  MultiList,
-  ResultCard,
-} from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch, ResultCard } from '@appbaseio/reactivesearch';
 
 class Search extends React.Component {
   state = {};
@@ -41,3 +35,29 @@ class Search extends React.Component {
 }
 
 export default Search;
+
+// curl -X PUT "localhost:9200/rfpindex/_mapping/wpsolr_types" -H 'Content-Type: application/json' -d'
+// {
+//   "properties": {
+//     "content_searchable": {
+//       "type": "text",
+//       "copy_to": [
+//         "text",
+//         "spell",
+//         "autocomplete"
+//       ]
+//     },
+//     "categories_str": {
+//       "type": "keyword",
+//       "copy_to": "content_searchable"
+//     },
+//     "technologies_str": {
+//       "type": "keyword",
+//       "copy_to": "content_searchable"
+//     },
+//     "name_str": {
+//       "type": "keyword",
+//       "copy_to": "content_searchable"
+//     }
+//   }
+// }'
