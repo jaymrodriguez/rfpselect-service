@@ -1,6 +1,34 @@
 import React from 'react';
-import { ReactiveBase, DataSearch, ResultCard, MultiDropdownList } from '@appbaseio/reactivesearch';
+import moment from 'moment';
+import {
+  ReactiveBase,
+  DataSearch,
+  ResultCard,
+  MultiDropdownList,
+  SingleRange,
+} from '@appbaseio/reactivesearch';
 
+const dateFilterValues = [
+  { start: 150, end: 0, label: 'Any' },
+  { start: 150, end: 1, label: '>1' },
+  { start: 3, end: 2, label: '2 - 3' },
+  { start: 5, end: 4, label: '4 - 5' },
+  { start: 150, end: 6, label: '5+' },
+];
+const yearsQuery = dateRange => ({
+  query: {
+    range: {
+      founding_date_dt: {
+        gte: moment()
+          .subtract(dateRange.start, 'years')
+          .format('YYYY-MM-DD'),
+        lte: moment()
+          .subtract(dateRange.end, 'years')
+          .format('YYYY-MM-DD'),
+      },
+    },
+  },
+});
 const Search = () => {
   const sugggestions = [
     { label: 'Intellisys', value: 'Intellisys' },
@@ -41,6 +69,12 @@ const Search = () => {
         showSearch={false}
         react={{ and: ['searchbox'] }}
       />
+      <SingleRange
+        componentId="date_filter"
+        dataField="founding_date_dt"
+        data={dateFilterValues}
+        customQuery={yearsQuery}
+      />
       <ResultCard
         componentId="result"
         title="Results"
@@ -49,7 +83,7 @@ const Search = () => {
         size={8}
         pagination
         react={{
-          and: ['searchbox', 'resourcing_filter', 'categories_str'],
+          and: ['searchbox', 'resourcing_filter', 'categories_filter', 'date_filter'],
         }}
         onData={res => ({
           image: 'https://bit.do/demoimg',
@@ -68,29 +102,3 @@ const Search = () => {
 };
 
 export default Search;
-
-// curl -X PUT "localhost:9200/rfpindex/_mapping/wpsolr_types" -H 'Content-Type: application/json' -d'
-// {
-//   "properties": {
-//     "content_searchable": {
-//       "type": "text",
-//       "copy_to": [
-//         "text",
-//         "spell",
-//         "autocomplete"
-//       ]
-//     },
-//     "categories_str": {
-//       "type": "keyword",
-//       "copy_to": "content_searchable"
-//     },
-//     "technologies_str": {
-//       "type": "keyword",
-//       "copy_to": "content_searchable"
-//     },
-//     "name_str": {
-//       "type": "keyword",
-//       "copy_to": "content_searchable"
-//     }
-//   }
-// }'
