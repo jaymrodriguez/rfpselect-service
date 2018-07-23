@@ -1,9 +1,14 @@
 import React from 'react';
-import { ReactiveBase, DataSearch, ResultCard } from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch, ResultCard, MultiDropdownList } from '@appbaseio/reactivesearch';
 
-class Search extends React.Component {
-  state = {};
-  render = () => (
+const Search = () => {
+  const sugggestions = [
+    { label: 'Intellisys', value: 'Intellisys' },
+    { label: 'PHP', value: 'PHP' },
+    { label: 'Content Management System', value: 'CMS' },
+    { label: 'JavaScript', value: 'JavaScript' },
+  ];
+  return (
     <ReactiveBase app="rfpindex" url="http://localhost:9200">
       <DataSearch
         componentId="searchbox"
@@ -13,6 +18,28 @@ class Search extends React.Component {
           value: suggestion._source.title,
         })}
         placeholder="Serch for Companies"
+        defaultSuggestions={sugggestions}
+      />
+      <MultiDropdownList
+        componentId="resourcing_filter"
+        dataField="resourcing_str"
+        title="Resourcing"
+        showSearch={false}
+        react={{ and: ['searchbox'] }}
+      />
+      <MultiDropdownList
+        componentId="technology_filter"
+        dataField="technologies_str"
+        title="Technologies"
+        showSearch={false}
+        react={{ and: ['searchbox'] }}
+      />
+      <MultiDropdownList
+        componentId="categories_filter"
+        dataField="categories_str"
+        title="Categories"
+        showSearch={false}
+        react={{ and: ['searchbox'] }}
       />
       <ResultCard
         componentId="result"
@@ -22,14 +49,15 @@ class Search extends React.Component {
         size={8}
         pagination
         react={{
-          and: ['searchbox'],
+          and: ['searchbox', 'resourcing_filter', 'categories_str'],
         }}
         onData={res => ({
           image: 'https://bit.do/demoimg',
           title: res.title,
           description: res.description_str,
+          url: `company/${res.id}`,
         })}
-        defaultQuery={(value, props) => ({
+        defaultQuery={() => ({
           match: {
             type: 'company',
           },
@@ -37,7 +65,7 @@ class Search extends React.Component {
       />
     </ReactiveBase>
   );
-}
+};
 
 export default Search;
 
