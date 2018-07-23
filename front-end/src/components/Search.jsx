@@ -19,7 +19,7 @@ class Search extends React.Component {
         title="Results"
         dataField="content_searchable"
         from={0}
-        size={5}
+        size={8}
         pagination
         react={{
           and: ['searchbox'],
@@ -28,6 +28,11 @@ class Search extends React.Component {
           image: 'https://bit.do/demoimg',
           title: res.title,
           description: res.description_str,
+        })}
+        defaultQuery={(value, props) => ({
+          match: {
+            type: 'company',
+          },
         })}
       />
     </ReactiveBase>
