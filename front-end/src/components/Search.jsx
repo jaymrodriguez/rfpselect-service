@@ -16,13 +16,20 @@ const sugggestions = [
   { label: 'Content Management System', value: 'CMS' },
   { label: 'JavaScript', value: 'JavaScript' },
 ];
-
 const dateFilterValues = [
   { start: 150, end: 0, label: 'Any' },
   { start: 150, end: 1, label: '>1' },
   { start: 3, end: 2, label: '2 - 3' },
   { start: 5, end: 4, label: '4 - 5' },
   { start: 150, end: 6, label: '5+' },
+];
+const sizeFilterValues = [
+  { start: 0, end: 10 ** 8, label: 'Any' },
+  { start: 1, end: 10, label: '1 - 10' },
+  { start: 11, end: 50, label: '11 - 50' },
+  { start: 51, end: 99, label: '51 -99' },
+  { start: 100, end: 10 ** 8, label: '100+' },
+  { start: 500, end: 10 ** 8, label: '500+' },
 ];
 const yearsQuery = dateRange => ({
   query: {
@@ -78,6 +85,13 @@ const Search = () => (
       data={dateFilterValues}
       customQuery={yearsQuery}
     />
+    <SingleDropdownRange
+      componentId="size_filter"
+      title="Size Of Organization"
+      dataField="size_of_organization_i"
+      react={{ and: ['searchbox'] }}
+      data={sizeFilterValues}
+    />
     <ResultCard
       componentId="result"
       title="Results"
@@ -86,12 +100,12 @@ const Search = () => (
       size={8}
       pagination
       react={{
-        and: ['searchbox', 'resourcing_filter', 'categories_filter', 'date_filter'],
+        and: ['searchbox', 'resourcing_filter', 'categories_filter', 'date_filter', 'size_filter'],
       }}
       onData={res => ({
         image: 'https://bit.do/demoimg',
         title: res.title,
-        description: res.description_str,
+        description: res.description,
         url: `company/${res.id}`,
       })}
       defaultQuery={() => ({
