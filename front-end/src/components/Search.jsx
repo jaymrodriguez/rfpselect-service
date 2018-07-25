@@ -46,7 +46,7 @@ const yearsQuery = dateRange => ({
   },
 });
 const Search = () => (
-  <ReactiveBase app="rfpindex" url="http://localhost:9200">
+  <ReactiveBase app="rfpindex" url={process.env.REACT_APP_ES}>
     <DataSearch
       componentId="searchbox"
       dataField="content_searchable"
