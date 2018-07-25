@@ -5,7 +5,7 @@ import './css/bootstrap.min.css';
 import './css/main.css';
 import './css/style.css';
 import App from './components/App';
-import { registerServiceWorker, unregister } from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-unregister();
+registerServiceWorker();
